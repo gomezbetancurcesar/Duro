@@ -1,0 +1,27 @@
+.titulotab
+{
+font-family: Arial, Helvetica, sans-serif; 
+font-size: 22px; 
+color: #6E6E6E; 
+font-weight: bold;
+}
+.td1
+{
+font-family: Arial, Helvetica, sans-serif; 
+font-size: 15px; 
+color: #6E6E6E; 
+
+}
+
+.boton{
+        font-size:10px;
+        font-family:Arial, Helvetica, sans-serif;
+         color:white;
+        background:#DED9B3;
+        border:1px;
+        width:83px;
+        height:21px;
+       }
+div.tablalogin table{
+   width:100%;
+   }

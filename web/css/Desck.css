@@ -1,0 +1,1401 @@
+/* Generado por Herramientas de desarrollo. Es posible que ésta no sea una representación precisa del archivo de origen original */
+
+@import url( reset.css );
+
+BODY {
+	MARGIN-TOP: 0px; FONT-FAMILY: "Arial", Tahoma, Geneva, sans-serif
+}
+
+BODY.Css_FondoLogin {
+	BACKGROUND-IMAGE: url(/App_Themes/Css_Solutel/imagenes/fondo/imagen_969.jpg); 
+	BACKGROUND-COLOR: #fbfbfb; 
+	MARGIN: 0px; 
+	BACKGROUND-REPEAT: no-repeat; 
+	BACKGROUND-POSITION: 0px 70px; 
+	background-size: cover
+}
+
+BODY.Css_FondoAcceso {	
+	background-image:url(../images/fondo/fondosolutel.png); 	
+	BACKGROUND-COLOR: #fbfbfb; 
+	MARGIN: 0px; 
+	BACKGROUND-REPEAT: repeat-x; 
+	BACKGROUND-POSITION: 50% top
+}
+
+.oculto {
+
+	DISPLAY: none
+
+}
+
+P {
+
+	MARGIN-BOTTOM: 5px; FONT-SIZE: 14px
+
+}
+
+H1 {
+
+	FONT-SIZE: 32px; FONT-WEIGHT: lighter
+
+}
+
+H2 {
+
+	FONT-SIZE: 28px; FONT-WEIGHT: lighter
+
+}
+
+H3 {
+
+	FONT-SIZE: 24px; FONT-WEIGHT: lighter
+
+}
+
+H4 {
+
+	FONT-SIZE: 20px; FONT-WEIGHT: lighter
+
+}
+
+H5 {
+
+	FONT-SIZE: 16px; 
+	FONT-WEIGHT: lighter
+
+}
+
+SPAN.Subtitulo1 {
+
+	COLOR: #666666; FONT-SIZE: 18px
+
+}
+
+SPAN.Subtitulo2 {
+
+	COLOR: #666666; FONT-SIZE: 14px
+
+}
+
+SPAN.Subtitulo3 {
+
+	COLOR: #666666; FONT-SIZE: 12px
+
+}
+
+#wrap {
+
+	MARGIN: 0px auto; WIDTH: 915px
+
+}
+
+.border-gris {
+
+	border-radius: 4px
+
+}
+
+.sombragris {
+
+	box-shadow: 5px 5px 5px 0px lightgray; -webkit-box-shadow: 5px 5px 5px 0px lightgray; -moz-box-shadow: 5px 5px 5px 0px lightgray
+
+}
+
+.header {
+
+	BACKGROUND-COLOR: transparent; WIDTH: 100%; OVERFLOW: hidden
+
+}
+
+.header .logo {
+
+	TEXT-INDENT: -9999px; FLOAT: left; TOP: 20px; LEFT: 0px; -webkit-animation-name: logoFall; -webkit-animation-duration: 1s; -webkit-animation-iteration-count: 1; -moz-animation-name: logoFall; -moz-animation-duration: 1s; -moz-animation-iteration-count: 1
+
+}
+
+.header .logo A {
+
+	WIDTH: 195px; DISPLAY: block; HEIGHT: 45px
+
+}
+
+.header .Css_logo {
+
+	MARGIN: 5px
+
+}
+
+.P-Right {
+
+	FLOAT: right; MARGIN-RIGHT: 5px
+
+}
+
+.P-Left {
+
+	FLOAT: left; MARGIN-LEFT: 5px
+
+}
+
+.P-Clear {
+
+	CLEAR: both
+
+}
+
+.P-MargenLeft {
+
+	MARGIN-LEFT: 10px
+
+}
+
+.P-MargenRight {
+
+	MARGIN-LEFT: 10px
+
+}
+
+.P-MargenTop {
+
+	MARGIN-LEFT: 10px
+
+}
+
+.P-MargenBottom {
+
+	MARGIN-LEFT: 10px
+
+}
+
+.BloqueComun {
+
+	BACKGROUND-IMAGE: url(../images/fondo/fondo_50Blanco.png); PADDING-BOTTOM: 10px; MARGIN: 0px; PADDING-LEFT: 10px; PADDING-RIGHT: 10px; PADDING-TOP: 10px; border-radius: 5px
+
+}
+
+.divisor {
+
+	BACKGROUND-COLOR: #bbbbbb; MARGIN: 0px 9px; WIDTH: 1px; HEIGHT: 20px; OVERFLOW: hidden; BORDER-RIGHT: #bbbbbb 0px solid
+
+}
+.Css_logoiCCorp {
+
+	BACKGROUND-IMAGE: url(../images/logotipos/logo_solutel.png); WIDTH: 308px; BACKGROUND-REPEAT: no-repeat; HEIGHT: 60px
+
+}
+
+.Css_logoiCCorp P {
+
+	DISPLAY: none
+
+}
+
+.Css_logoiCCorpLogin {
+
+	BACKGROUND-IMAGE: url(SOLUTEL.PNG);
+	background-image:url(images/logotipos/logo_solutel.png); 
+	
+	
+	WIDTH: 308px; BACKGROUND-REPEAT: no-repeat; HEIGHT: 60px
+
+}
+
+.Css_logoiCCorpLogin P {
+
+	DISPLAY: none
+
+}
+
+.DivisorDerecho {
+
+	PADDING-RIGHT: 10px; BORDER-RIGHT: #dfdfdf 1px solid
+
+}
+
+.DivisorIzquierdo {
+
+	BORDER-LEFT: #dfdfdf 1px solid; PADDING-LEFT: 10px
+
+}
+
+.Css_headerLogin {
+
+	PADDING-BOTTOM: 5px; MARGIN: 0px auto; PADDING-LEFT: 5px; WIDTH: 800px; PADDING-RIGHT: 5px; PADDING-TOP: 5px
+
+}
+
+.loginAccesos {
+
+
+
+	background-image:url(../images/fondo/fondosolutel.png);
+
+	
+
+	PADDING-BOTTOM: 10px; BACKGROUND-COLOR: transparent; MARGIN: 30px auto 0px; PADDING-LEFT: 10px; WIDTH: 800px; PADDING-RIGHT: 10px; BACKGROUND-REPEAT: no-repeat; OVERFLOW: hidden; TOP: 150px; PADDING-TOP: 10px; border-radius: 5px
+
+}
+
+.loginAccesos H2 {
+
+	COLOR: #808080
+
+}
+
+.loginAccesos .section {
+
+	PADDING-BOTTOM: 10px; PADDING-LEFT: 10px; WIDTH: 800px; PADDING-RIGHT: 10px; PADDING-TOP: 10px
+
+}
+
+.loginAccesos .section P {
+
+	PADDING-BOTTOM: 10px; FONT-SIZE: 12px
+
+}
+
+.loginAccesos .Bloque {
+
+	BACKGROUND-IMAGE: url(../images/fondo/fondo_50Blanco.png); PADDING-BOTTOM: 10px; MARGIN: 0px; PADDING-LEFT: 10px; WIDTH: 260px; PADDING-RIGHT: 10px; PADDING-TOP: 10px; border-radius: 5px
+
+}
+
+.loginAccesosContenidos {
+
+	MARGIN: 0px auto
+
+}
+
+.loginAccesosContenidos {
+
+	WIDTH: 800px
+
+}
+
+.loginAccesosContenidos H2 {
+
+	COLOR: #ffffff
+
+}
+
+.loginAccesosContenidos H3 {
+
+	COLOR: #333
+
+}
+
+.loginAccesosContenidos H4 {
+
+	COLOR: #333
+
+}
+
+.loginAccesosContenidos H5 {
+
+	COLOR: #848283
+
+}
+
+.loginAccesosContenidos .section {
+
+	PADDING-BOTTOM: 10px; PADDING-LEFT: 10px; WIDTH: 800px; PADDING-RIGHT: 10px; PADDING-TOP: 10px
+
+}
+
+.loginAccesosContenidos .section P {
+
+	PADDING-BOTTOM: 10px; FONT-SIZE: 12px
+
+}
+
+.loginAccesosContenidos UL {
+
+	LIST-STYLE-TYPE: none; DISPLAY: inline; LIST-STYLE-IMAGE: none
+
+}
+
+.loginAccesosContenidos LI {
+
+	PADDING-BOTTOM: 5px; MARGIN-TOP: 5px; FLOAT: left
+
+}
+
+.loginAccesosContenidos LI DIV.label {
+
+	WIDTH: 70px; PADDING-RIGHT: 10px; FONT-SIZE: 10px
+
+}
+
+.loginAccesosContenidos LI DIV.label LABEL {
+
+	COLOR: #333; FONT-WEIGHT: normal
+
+}
+
+.loginAccesosContenidos LI .Css_Contenido {
+
+	FONT-SIZE: 11px
+
+}
+
+.loginAccesosContenidos LI.DivisorDerecho {
+
+	BORDER-RIGHT: #999999 1px solid
+
+}
+
+.Css_BajoLogin {
+
+	MARGIN: 0px auto; WIDTH: 800px
+
+}
+
+.navbar {
+
+	BACKGROUND-IMAGE: url(/App_Themes/Css_LosAndes/imagenes/fondo/fondo_franja.png); 
+	PADDING-BOTTOM: 2px; 
+	BACKGROUND-COLOR: transparent; 
+	BACKGROUND-REPEAT: repeat-x; 
+	BACKGROUND-POSITION: 50% top; 
+	HEIGHT: 30px; 
+	PADDING-TOP: 2px
+
+}
+
+.navbar .logoinicio {
+
+	BACKGROUND-IMAGE: url(/App_Themes/Css_LosAndes/imagenes/logotipos/logoICO_LAN.png); 
+	MARGIN-TOP: 10px; 
+	PADDING-LEFT: 10px; 
+	WIDTH: 146px; 
+	BACKGROUND-REPEAT: no-repeat; 
+	FLOAT: left; 
+	HEIGHT: 35px; 
+	CURSOR: pointer; 
+	PADDING-TOP: 8px
+
+}
+
+.navbar .logoinicio P {
+
+	DISPLAY: none
+
+}
+
+.navbar .nav {
+
+	POSITION: relative; PADDING-BOTTOM: 5px; BACKGROUND-COLOR: transparent; MARGIN: 0px 10px 0px 0px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; DISPLAY: block; FLOAT: left; FONT-SIZE: 12px; PADDING-TOP: 5px; LEFT: 0px; border-radius: 5px
+
+}
+
+.navbar .nav > LI {
+
+	DISPLAY: block; FLOAT: left
+
+}
+
+.navbar .nav > LI > A {
+
+	PADDING-BOTTOM: 10px; LINE-HEIGHT: 19px; PADDING-LEFT: 10px; PADDING-RIGHT: 10px; FLOAT: none; COLOR: #000000; TEXT-DECORATION: none; PADDING-TOP: 9px; text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25)
+
+}
+
+.navbar .nav > LI > A:hover {
+
+	BACKGROUND-COLOR: #f0f0f6; COLOR: #333333
+
+}
+
+.navbar-fixed-top {
+
+	Z-INDEX: 1030; POSITION: fixed; MARGIN-BOTTOM: 0px; RIGHT: 0px; LEFT: 0px
+
+}
+
+.navbar-fixed-bottom {
+
+	Z-INDEX: 1030; POSITION: fixed; MARGIN-BOTTOM: 0px; RIGHT: 0px; LEFT: 0px
+
+}
+
+.dato_usuario {
+
+	HEIGHT: 10px; MARGIN-LEFT: 5px; FONT-SIZE: 12px; MARGIN-RIGHT: 5px; PADDING-TOP: 7px
+
+}
+
+.dato_usuario A.usuario {
+
+	PADDING-BOTTOM: 11px; BACKGROUND-COLOR: #0067eb; PADDING-LEFT: 10px; PADDING-RIGHT: 10px; COLOR: #fff; PADDING-TOP: 11px
+
+}
+
+.dato_usuario A.usuario:hover {
+
+	PADDING-BOTTOM: 11px; BACKGROUND-COLOR: #039; PADDING-LEFT: 10px; PADDING-RIGHT: 10px; COLOR: #fff; PADDING-TOP: 11px
+
+}
+
+.btn-group {
+
+	POSITION: relative
+
+}
+
+.css_ayuda {
+
+	MARGIN-LEFT: 5px; MARGIN-RIGHT: 5px; PADDING-TOP: 5px
+
+}
+
+.css_ayuda A {
+
+	BACKGROUND-COLOR: transparent; PADDING-LEFT: 10px; PADDING-RIGHT: 10px; COLOR: #000
+
+}
+
+.css_ayuda A:hover {
+
+	PADDING-BOTTOM: 10px; BACKGROUND-COLOR: #f0f0f6; PADDING-LEFT: 10px; PADDING-RIGHT: 10px; COLOR: #333; PADDING-TOP: 10px
+
+}
+
+INPUT.BotonCrear {
+
+	BACKGROUND-IMAGE: url(/App_Themes/Css_Solutel/imagenes/icons/ico_blanco.png); BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; PADDING-BOTTOM: 10px; BACKGROUND-COLOR: #af1316; PADDING-LEFT: 20px; WIDTH: 220px; PADDING-RIGHT: 20px; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: left center; COLOR: #fff; FONT-SIZE: 18px; BORDER-TOP: 0px; CURSOR: pointer; BORDER-RIGHT: 0px; PADDING-TOP: 10px
+
+}
+
+INPUT.BotonCrear:hover {
+
+	BACKGROUND-IMAGE: url(/App_Themes/Css_LosAndes/imagenes/icons/ico_blanco.png); BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; PADDING-BOTTOM: 10px; BACKGROUND-COLOR: #ed7779; PADDING-LEFT: 20px; PADDING-RIGHT: 20px; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: left center; COLOR: #fff; FONT-SIZE: 18px; BORDER-TOP: 0px; CURSOR: pointer; BORDER-RIGHT: 0px; PADDING-TOP: 10px
+
+}
+
+INPUT.BotonIngresar {
+
+	BACKGROUND-COLOR: #2C6DB2; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; PADDING-BOTTOM: 10px; TEXT-TRANSFORM: uppercase; PADDING-LEFT: 20px; WIDTH: 100%; PADDING-RIGHT: 20px; COLOR: #fff; FONT-SIZE: 14px; BORDER-TOP: 0px; CURSOR: pointer; BORDER-RIGHT: 0px; PADDING-TOP: 10px; border-radius: 5px
+
+}
+
+INPUT.BotonIngresar:hover {
+
+	BACKGROUND-COLOR: rgba(44,109,178,0.7); BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; PADDING-BOTTOM: 10px; PADDING-LEFT: 20px; WIDTH: 100%; PADDING-RIGHT: 20px; COLOR: #fff; FONT-SIZE: 14px; BORDER-TOP: 0px; CURSOR: pointer; BORDER-RIGHT: 0px; PADDING-TOP: 10px; border-radius: 5px
+
+}
+
+INPUT.BotonFormRegistro {
+
+	BACKGROUND-IMAGE: url(/App_Themes/Css_LosAndes/imagenes/icons/ico_blanco.png); BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; PADDING-BOTTOM: 10px; BACKGROUND-COLOR: #af1316; PADDING-LEFT: 20px; PADDING-RIGHT: 20px; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: left center; COLOR: #fff; FONT-SIZE: 16px; BORDER-TOP: 0px; CURSOR: pointer; BORDER-RIGHT: 0px; PADDING-TOP: 10px
+
+}
+
+INPUT.BotonFormRegistro:hover {
+
+	PADDING-BOTTOM: 10px; BACKGROUND-COLOR: #ed7779; PADDING-LEFT: 20px; PADDING-RIGHT: 20px; CURSOR: pointer; PADDING-TOP: 10px
+
+}
+
+INPUT.BotonExportar {
+
+	BACKGROUND-IMAGE: url(/App_Themes/Css_LosAndes/imagenes/icons/ico_descargar.png); BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; PADDING-BOTTOM: 10px; BACKGROUND-COLOR: #af1316; PADDING-LEFT: 40px; PADDING-RIGHT: 20px; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: left center; COLOR: #fff; FONT-SIZE: 14px; BORDER-TOP: 0px; CURSOR: pointer; BORDER-RIGHT: 0px; PADDING-TOP: 10px
+
+}
+
+INPUT.BotonExportar:hover {
+
+	BACKGROUND-IMAGE: url(/App_Themes/Css_LosAndes/imagenes/icons/ico_descargar.png); BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; PADDING-BOTTOM: 10px; BACKGROUND-COLOR: #ed7779; PADDING-LEFT: 40px; PADDING-RIGHT: 20px; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: left center; COLOR: #fff; FONT-SIZE: 14px; BORDER-TOP: 0px; CURSOR: pointer; BORDER-RIGHT: 0px; PADDING-TOP: 10px
+
+}
+
+DIV.Css_BotonCerrar {
+
+	BORDER-BOTTOM: #999999 1px solid; BORDER-LEFT: #999999 1px solid; PADDING-BOTTOM: 3px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; FLOAT: right; HEIGHT: 12px; COLOR: #666; BORDER-TOP: #999999 1px solid; BORDER-RIGHT: #999999 1px solid; PADDING-TOP: 3px; border-radius: 80px
+
+}
+
+DIV.Css_BotonCerrar:hover {
+
+	BACKGROUND-COLOR: #00ffff; CURSOR: pointer
+
+}
+
+.LinkCss_ColorRojo {
+
+	COLOR: #c00
+
+}
+
+.contenedor {
+
+	PADDING-BOTTOM: 10px; MARGIN-BOTTOM: 10px; OVERFLOW: hidden
+
+}
+
+.SectorDerecho {
+
+	WIDTH: 230px; MARGIN-LEFT: 10px; MARGIN-RIGHT: 0px
+
+}
+
+.SectorCentral {
+
+	MARGIN-LEFT: 10px; MARGIN-RIGHT: 10px
+
+}
+
+.SectorAdicional {
+
+	MARGIN-LEFT: 20px
+
+}
+
+.contenedor-form-registro {
+
+	PADDING-BOTTOM: 10px; MARGIN: 0px auto; PADDING-LEFT: 5px; WIDTH: 720px; PADDING-RIGHT: 5px; PADDING-TOP: 5px
+
+}
+
+.AccesosMiNegocioPhone {
+
+	DISPLAY: none
+
+}
+
+.AccesosMiNegocio {
+
+	MARGIN: 0px auto; WIDTH: 1020px
+
+}
+
+.AccesosMiNegocio .AccesosDirectos {
+
+	TEXT-ALIGN: center; BACKGROUND-COLOR: #f1f1f1; MARGIN-TOP: 10px; WIDTH: 300px; MARGIN-BOTTOM: 10px; FLOAT: left; OVERFLOW: hidden; MARGIN-RIGHT: 10px; border-radius: 5px
+
+}
+
+.AccesosMiNegocio .AccesosDirectos LI {
+
+	
+
+}
+
+.AccesosMiNegocio .AccesosDirectos LI A:hover {
+
+	BACKGROUND: #f0f0f6; COLOR: #333
+
+}
+
+.AccesosMiNegocio .AccesosDirectos P {
+
+	MARGIN: 10px; COLOR: #333; FONT-SIZE: 10px
+
+}
+
+.AccesosMiNegocio .AccesosDirectos H2 {
+
+	COLOR: #848283; FONT-SIZE: 18px
+
+}
+
+.AccesosMiNegocio .AccesosDirectos IMG {
+
+	WIDTH: 300px
+
+}
+
+.AreadDeContenido {
+
+	PADDING-BOTTOM: 5px; BACKGROUND-COLOR: #f9f9f9; PADDING-LEFT: 5px; WIDTH: 850px; PADDING-RIGHT: 5px; OVERFLOW: hidden; PADDING-TOP: 5px; border-radius: 5px
+
+}
+
+.Css_Footer {
+
+	POSITION: fixed; PADDING-BOTTOM: 2px; BACKGROUND-COLOR: #e9e9e9; PADDING-LEFT: 2px; WIDTH: 100%; BOTTOM: 0px; PADDING-RIGHT: 2px; HEIGHT: 35px; COLOR: #666; FONT-SIZE: 12px; OVERFLOW: hidden; PADDING-TOP: 2px
+
+}
+
+.Css_Footer H1 {
+
+	MARGIN-BOTTOM: 5px; COLOR: #ccc
+
+}
+
+H2 {
+
+	MARGIN-BOTTOM: 5px; COLOR: #ccc
+
+}
+
+H3 {
+
+	MARGIN-BOTTOM: 5px; COLOR: #ccc
+
+}
+
+H4 {
+
+	MARGIN-BOTTOM: 5px; COLOR: #ccc
+
+}
+
+H5 {
+
+	MARGIN-BOTTOM: 5px; COLOR: #ccc
+
+}
+
+H6 {
+
+	MARGIN-BOTTOM: 5px; COLOR: #ccc
+
+}
+
+.Css_Encuentranos {
+
+	PADDING-LEFT: 15px
+
+}
+
+.Css_Encuentranos DT {
+
+	MARGIN-BOTTOM: 5px; FONT-SIZE: 12px
+
+}
+
+.Css_Encuentranos DD {
+
+	MARGIN-BOTTOM: 10px; FONT-SIZE: 10px
+
+}
+
+.Css_Encuentranos DD A {
+
+	FONT-SIZE: 10px
+
+}
+
+.Css_Social {
+
+	
+
+}
+
+.Css_Footer .Css_Centro {
+
+	MARGIN: 0px auto; WIDTH: 800px
+
+}
+
+.Css_Footer UL {
+
+	LIST-STYLE-TYPE: none; DISPLAY: inline; LIST-STYLE-IMAGE: none
+
+}
+
+.Css_Footer LI {
+
+	MARGIN-TOP: 5px; FLOAT: left
+
+}
+
+.Css_Footer LI DIV.label {
+
+	WIDTH: 70px; PADDING-RIGHT: 10px; FONT-SIZE: 10px
+
+}
+
+.Css_Footer LI DIV.label LABEL {
+
+	COLOR: #333; FONT-WEIGHT: normal
+
+}
+
+.Css_Footer LI .Css_Contenido {
+
+	FONT-SIZE: 11px
+
+}
+
+.Css_Footer LI.DivisorDerecho {
+
+	BORDER-RIGHT: #999999 1px solid
+
+}
+
+.Css_Footer UL.Css_infoEmpresa {
+
+	HEIGHT: 30px
+
+}
+
+.Css_Footer UL.Css_infoEmpresa LI {
+
+	DISPLAY: inline
+
+}
+
+.Css_Footer UL.Css_infoEmpresa LI IMG.ImgLogoEmpresa {
+
+	FILTER: gray; WIDTH: 86px; MAX-WIDTH: 86px; VERTICAL-ALIGN: middle; MARGIN-RIGHT: 10px; -webkit-filter: grayscale(1)
+
+}
+
+.Css_Footer UL.Css_infoEmpresa LI P {
+
+	COLOR: #f1592a; FONT-SIZE: 10px
+
+}
+
+.Css_Footer UL.Css_infoEmpresa LI IMG.ImgLogoEmpresa:hover {
+
+	FILTER: none; WIDTH: 86px; CURSOR: pointer; -webkit-filter: grayscale(1)
+
+}
+
+.Css_Footer UL.Css_infoEmpresa LI.Css_infoLabel {
+
+	COLOR: #999999; FONT-SIZE: 11px
+
+}
+
+INPUT.CajaBuscaDatos {
+
+	BORDER-BOTTOM: #c4c4c4 1px solid; BORDER-LEFT: #c4c4c4 1px solid; PADDING-BOTTOM: 5px; PADDING-LEFT: 10px; WIDTH: 90%; PADDING-RIGHT: 10px; COLOR: #b9b9b9; FONT-SIZE: 15px; BORDER-TOP: #c4c4c4 1px solid; BORDER-RIGHT: #c4c4c4 1px solid; PADDING-TOP: 5px; border-radius: 5px
+
+}
+
+INPUT.CajaBuscaDatos:focus {
+
+	BORDER-BOTTOM: #af1316 1px solid; BORDER-LEFT: #af1316 1px solid; PADDING-BOTTOM: 5px; PADDING-LEFT: 10px; WIDTH: 90%; PADDING-RIGHT: 10px; COLOR: #333333; BORDER-TOP: #af1316 1px solid; BORDER-RIGHT: #af1316 1px solid; PADDING-TOP: 5px; border-radius: 5px
+
+}
+
+INPUT.CajaDatoUsuario {
+
+	BORDER-BOTTOM: #c4c4c4 1px solid; BORDER-LEFT: #c4c4c4 1px solid; PADDING-BOTTOM: 5px; PADDING-LEFT: 10px; WIDTH: 90%; PADDING-RIGHT: 10px; COLOR: #b9b9b9; FONT-SIZE: 15px; BORDER-TOP: #c4c4c4 1px solid; BORDER-RIGHT: #c4c4c4 1px solid; PADDING-TOP: 5px; border-radius: 5px
+
+}
+
+INPUT.CajaDatoUsuario:focus {
+
+	BORDER-BOTTOM: #af1316 1px solid; BORDER-LEFT: #af1316 1px solid; PADDING-BOTTOM: 5px; PADDING-LEFT: 10px; WIDTH: 90%; PADDING-RIGHT: 10px; COLOR: #333333; BORDER-TOP: #af1316 1px solid; BORDER-RIGHT: #af1316 1px solid; PADDING-TOP: 5px; border-radius: 5px
+
+}
+
+.Css_Resultados UL {
+
+	WIDTH: 890px; CLEAR: both; FONT-SIZE: 12px
+
+}
+
+.Css_FondoPar {
+
+	PADDING-BOTTOM: 5px; BACKGROUND-COLOR: #ffffff; PADDING-TOP: 5px
+
+}
+
+.Css_FondoImPar {
+
+	PADDING-BOTTOM: 5px; BACKGROUND-COLOR: transparent; PADDING-TOP: 5px
+
+}
+
+.Css_Resultados .Css_Selection {
+
+	
+
+}
+
+.Css_Resultados .Css_Selection:hover {
+
+	BACKGROUND-COLOR: #00ffff; CURSOR: pointer
+
+}
+
+.Css_Resultados .Css_Linea {
+
+	MARGIN-BOTTOM: 10px; OVERFLOW: hidden
+
+}
+
+.Css_Resultados LI {
+
+	DISPLAY: inline
+
+}
+
+.Css_Resultados LI .Css_NumLinea {
+
+	PADDING-LEFT: 5px; WIDTH: 30px; FONT-SIZE: 12px; OVERFLOW: hidden; FONT-WEIGHT: lighter
+
+}
+
+.Css_Resultados LI .Css_Cabebera {
+
+	FONT-SIZE: 12px; OVERFLOW: hidden; FONT-WEIGHT: bold
+
+}
+
+.Css_Resultados LI .Css_CabeberaTipoDocumento {
+
+	WIDTH: 100px; PADDING-RIGHT: 10px; FONT-SIZE: 12px; OVERFLOW: hidden; FONT-WEIGHT: bold
+
+}
+
+.Css_Resultados LI .Css_CabeberaNumero {
+
+	WIDTH: 100px; PADDING-RIGHT: 10px; FONT-SIZE: 12px; OVERFLOW: hidden; FONT-WEIGHT: bold
+
+}
+
+.Css_Resultados LI .Css_CabeberaEmpresa {
+
+	WIDTH: 120px; PADDING-RIGHT: 10px; FONT-SIZE: 12px; OVERFLOW: hidden; FONT-WEIGHT: bold
+
+}
+
+.Css_Resultados LI .Css_CabeberaDescripcion {
+
+	WIDTH: 200px; PADDING-RIGHT: 10px; FONT-SIZE: 12px; OVERFLOW: hidden; FONT-WEIGHT: bold
+
+}
+
+.Css_Resultados LI .Css_CabeberaValor {
+
+	TEXT-ALIGN: right; WIDTH: 120px; PADDING-RIGHT: 10px; FONT-SIZE: 12px; OVERFLOW: hidden; FONT-WEIGHT: bold
+
+}
+
+.Css_Resultados LI .datos {
+
+	WIDTH: 140px; PADDING-RIGHT: 10px; OVERFLOW: hidden
+
+}
+
+.Css_Resultados LI .datosTipoDocumento {
+
+	WIDTH: 100px; PADDING-RIGHT: 10px; OVERFLOW: hidden
+
+}
+
+.Css_Resultados LI .datosNumero {
+
+	WIDTH: 100px; PADDING-RIGHT: 10px; OVERFLOW: hidden
+
+}
+
+.Css_Resultados LI .datosEmpresa {
+
+	WIDTH: 120px; PADDING-RIGHT: 10px; OVERFLOW: hidden
+
+}
+
+.Css_Resultados LI .datosDescripcion {
+
+	WIDTH: 200px; PADDING-RIGHT: 10px; OVERFLOW: hidden
+
+}
+
+.Css_Resultados LI .datosValor {
+
+	TEXT-ALIGN: right; WIDTH: 120px; PADDING-RIGHT: 10px; OVERFLOW: hidden
+
+}
+
+.CssOcultaMuestra1 {
+
+	DISPLAY: block
+
+}
+
+.CssOcultaMuestra2 {
+
+	DISPLAY: block
+
+}
+
+.CssOcultaMuestra3 {
+
+	DISPLAY: block
+
+}
+
+.CssOcultaMuestra4 {
+
+	DISPLAY: block
+
+}
+
+.CssOcultaMuestra5 {
+
+	DISPLAY: block
+
+}
+
+.Css_VistaPrevia {
+
+	POSITION: fixed; PADDING-BOTTOM: 5px; BACKGROUND-COLOR: #fcfcfc; PADDING-LEFT: 5px; WIDTH: 230px; PADDING-RIGHT: 5px; DISPLAY: none; OVERFLOW: hidden; TOP: 50px; RIGHT: 20px; PADDING-TOP: 5px; border-radius: 5px
+
+}
+
+.Css_VistaPrevia .Css_Documento {
+
+	TEXT-ALIGN: center; PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+
+}
+
+.Css_VistaPrevia .Css_Documento UL {
+
+	
+
+}
+
+.Css_VistaPrevia .Css_Documento LI {
+
+	LIST-STYLE-TYPE: none; LIST-STYLE-IMAGE: none
+
+}
+
+.Css_VistaPrevia .Css_Documento LI.Total {
+
+	COLOR: #666666; FONT-SIZE: 14px
+
+}
+
+.Css_VistaPrevia .Css_Documento LI.Cantidad {
+
+	COLOR: #1b5f99; FONT-SIZE: 28px
+
+}
+
+.Css_VistaPrevia .Css_Documento LI.CostoTotal {
+
+	COLOR: #666666; FONT-SIZE: 14px
+
+}
+
+.Css_VistaPrevia .Css_Documento LI.ValorCostoTotal {
+
+	COLOR: #fa6906; FONT-SIZE: 18px
+
+}
+
+.DetalleDocumento {
+
+	OVERFLOW: hidden
+
+}
+
+.DetalleDocumento H3 {
+
+	COLOR: #333333
+
+}
+
+.dropdown-menu {
+
+	Z-INDEX: 1000; BORDER-BOTTOM: #ccc 1px solid; POSITION: absolute; MIN-WIDTH: 160px; BORDER-LEFT: #ccc 1px solid; PADDING-BOTTOM: 4px; BACKGROUND-COLOR: #ffffff; LIST-STYLE-TYPE: none; MARGIN: 1px 0px 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; DISPLAY: none; FLOAT: left; BORDER-TOP: #ccc 1px solid; TOP: 100%; LIST-STYLE-IMAGE: none; BORDER-RIGHT: #ccc 1px solid; PADDING-TOP: 4px; LEFT: 0px; border-radius: 5px; box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); -webkit-border-radius: 5px; -moz-border-radius: 5px; -webkit-background-clip: padding-box; -moz-background-clip: padding; background-clip: padding-box
+
+}
+
+.dropdown-menu .divisor {
+
+	BORDER-BOTTOM: #ffffff 1px solid; BACKGROUND-COLOR: #e5e5e5; MARGIN: 8px 1px; HEIGHT: 1px; OVERFLOW: hidden
+
+}
+
+.dropdown-menu A {
+
+	PADDING-BOTTOM: 3px; LINE-HEIGHT: 18px; PADDING-LEFT: 15px; PADDING-RIGHT: 15px; DISPLAY: block; WHITE-SPACE: nowrap; COLOR: #333333; CLEAR: both; FONT-WEIGHT: normal; PADDING-TOP: 3px
+
+}
+
+.dropdown-menu LI > A:hover {
+
+	BACKGROUND-COLOR: #0088cc; COLOR: #ffffff; TEXT-DECORATION: none
+
+}
+
+.dropdown-menu .active > A {
+
+	BACKGROUND-COLOR: #0088cc; COLOR: #ffffff; TEXT-DECORATION: none
+
+}
+
+.dropdown-menu .active > A:hover {
+
+	BACKGROUND-COLOR: #0088cc; COLOR: #ffffff; TEXT-DECORATION: none
+
+}
+
+.open > .dropdown-menu {
+
+	DISPLAY: block
+
+}
+
+.btn-group:before {
+
+	DISPLAY: table; CONTENT: ""
+
+}
+
+.btn-group:after {
+
+	DISPLAY: table; CONTENT: ""
+
+}
+
+.btn-group:after {
+
+	CLEAR: both
+
+}
+
+.btn-group:first-child {
+
+	
+
+}
+
+.btn-group + .btn-group {
+
+	MARGIN-LEFT: 5px
+
+}
+
+.FormRegistrarContenedor {
+
+	MARGIN: 0px auto; WIDTH: 700px
+
+}
+
+.FormRegistrarContenedor DIV.Css_Pasos {
+
+	MARGIN: 0px 0px 5px; COLOR: #999; FONT-SIZE: 16px; FONT-WEIGHT: bold
+
+}
+
+.FormRegistrar DIV.Css_AreaDestacada {
+
+	BORDER-BOTTOM: #ff0000 1px solid; BORDER-LEFT: #ff0000 1px solid; PADDING-BOTTOM: 5px; TEXT-INDENT: 17px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; LETTER-SPACING: 0.11em; COLOR: #ff0000; BORDER-TOP: #ff0000 1px solid; FONT-WEIGHT: bold; BORDER-RIGHT: #ff0000 1px solid; PADDING-TOP: 5px; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px
+
+}
+
+.FormRegistrar DIV.Css_AreaDestacada P {
+
+	MARGIN: 0px; FONT-SIZE: 12px
+
+}
+
+.FormRegistrar H3 {
+
+	LINE-HEIGHT: 37px; MARGIN-BOTTOM: 5px; FONT-WEIGHT: lighter
+
+}
+
+.FormRegistrar H4 {
+
+	PADDING-BOTTOM: 10px; PADDING-LEFT: 10px; PADDING-RIGHT: 10px; MARGIN-BOTTOM: 5px; FONT-WEIGHT: lighter; PADDING-TOP: 10px
+
+}
+
+.FormRegistrar H5 {
+
+	MARGIN: 5px 0px; COLOR: #af1316
+
+}
+
+.FormRegistrar P {
+
+	TEXT-ALIGN: justify; MARGIN-BOTTOM: 10px
+
+}
+
+.FormRegistrar DIV.label {
+
+	PADDING-BOTTOM: 5px; PADDING-LEFT: 5px; WIDTH: 100px; PADDING-RIGHT: 5px; FLOAT: left; COLOR: #333; FONT-SIZE: 12px; OVERFLOW: hidden; PADDING-TOP: 8px
+
+}
+
+.FormRegistrar DIV.label LABEL {
+
+	FLOAT: right
+
+}
+
+.FormRegistrar DIV.contenidolabel {
+
+	PADDING-BOTTOM: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; OVERFLOW: hidden; PADDING-TOP: 5px
+
+}
+
+.FormRegistrar DIV.contenidolabel P {
+
+	TEXT-ALIGN: justify; MARGIN: 0px; COLOR: #333; VERTICAL-ALIGN: text-bottom
+
+}
+
+.FormRegistrar DIV.contenidolabel DIV.Css_Ayuda {
+
+	MARGIN-TOP: 5px; COLOR: #666; FONT-SIZE: 11px
+
+}
+
+.FormRegistrar DIV.Css_Alerta {
+
+	COLOR: #c00
+
+}
+
+.FormRegistrar SELECT.selectComun {
+
+	BACKGROUND-IMAGE: url(imagenes/fondos/fondo_cajastexto.png); BORDER-BOTTOM: #999 1px solid; BORDER-LEFT: #999 1px solid; PADDING-BOTTOM: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; BACKGROUND-REPEAT: repeat-x; BACKGROUND-POSITION: 50% top; COLOR: #666666; FONT-SIZE: 15px; BORDER-TOP: #999 1px solid; BORDER-RIGHT: #999 1px solid; PADDING-TOP: 5px
+
+}
+
+.FormRegistrar SELECT.selectComun OPTION {
+
+	COLOR: #333; CURSOR: pointer
+
+}
+
+.FormRegistrar SELECT.selectComun OPTION:hover {
+
+	BACKGROUND-COLOR: #27aae1; COLOR: #fff; CURSOR: pointer
+
+}
+
+.FormRegistrar SELECT.selectComun OPTION:focus {
+
+	BACKGROUND-COLOR: #27aae1; COLOR: #fff; CURSOR: pointer
+
+}
+
+.FormRegistrar INPUT.cajaComun {
+
+	BACKGROUND-IMAGE: url(imagenes/fondos/fondo_cajastexto.png); BORDER-BOTTOM: #999 1px solid; BORDER-LEFT: #999 1px solid; PADDING-BOTTOM: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; BACKGROUND-REPEAT: repeat-x; BACKGROUND-POSITION: 50% top; COLOR: #666666; FONT-SIZE: 15px; BORDER-TOP: #999 1px solid; BORDER-RIGHT: #999 1px solid; PADDING-TOP: 5px; border-radius: 5px
+
+}
+
+.FormRegistrar INPUT.cajaComun:focus {
+
+	BORDER-BOTTOM: #af1316 1px solid; BORDER-LEFT: #af1316 1px solid; COLOR: #333333; BORDER-TOP: #af1316 1px solid; BORDER-RIGHT: #af1316 1px solid
+
+}
+
+.FormRegistrar INPUT.cajaComun:hover {
+
+	BORDER-BOTTOM: #af1316 1px solid; BORDER-LEFT: #af1316 1px solid; BORDER-TOP: #af1316 1px solid; BORDER-RIGHT: #af1316 1px solid
+
+}
+
+.FormRegistrar INPUT.textAreaComun {
+
+	BACKGROUND-IMAGE: url(imagenes/fondos/fondo_cajastexto.png); BORDER-BOTTOM: #999 1px solid; BORDER-LEFT: #999 1px solid; PADDING-BOTTOM: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; BACKGROUND-REPEAT: repeat-x; BACKGROUND-POSITION: 50% top; COLOR: #999999; FONT-SIZE: 15px; BORDER-TOP: #999 1px solid; BORDER-RIGHT: #999 1px solid; PADDING-TOP: 5px
+
+}
+
+.FormRegistrar INPUT.textAreaComun:focus {
+
+	BORDER-BOTTOM: #0788f9 1px solid; BORDER-LEFT: #0788f9 1px solid; COLOR: #333333; BORDER-TOP: #0788f9 1px solid; BORDER-RIGHT: #0788f9 1px solid
+
+}
+
+.FormRegistrar INPUT.textAreaComun:hover {
+
+	BORDER-BOTTOM: #0788f9 1px solid; BORDER-LEFT: #0788f9 1px solid; BORDER-TOP: #0788f9 1px solid; BORDER-RIGHT: #0788f9 1px solid
+
+}
+
+UL.Css_infoEmpresa {
+
+	
+
+}
+
+UL.Css_infoEmpresa LI {
+
+	DISPLAY: inline
+
+}
+
+UL.Css_infoEmpresa LI IMG.ImgLogoEmpresa {
+
+	FILTER: gray; WIDTH: 86px; MAX-WIDTH: 86px; VERTICAL-ALIGN: top; MARGIN-RIGHT: 10px; -webkit-filter: grayscale(1)
+
+}
+
+UL.Css_infoEmpresa LI IMG.ImgLogoEmpresa:hover {
+
+	FILTER: none; WIDTH: 86px; CURSOR: pointer; -webkit-filter: grayscale(1)
+
+}
+
+UL.Css_infoEmpresa LI.Css_infoLabel {
+
+	COLOR: #999999; FONT-SIZE: 11px
+
+}
+
+.margenTop_37px {
+
+	MARGIN-TOP: 37px
+
+}
+
+.FormRegistrar {
+
+	WIDTH: 100%
+
+}
+
+.Css_BulletRoja {
+
+	COLOR: #c00; FONT-SIZE: 130%
+
+}
+
+#Form1 .FormRegistrar {
+
+	BORDER-BOTTOM: #f5f5f5 1px solid; OVERFLOW: hidden
+
+}
+
+#Form1 .FormRegistrar .SC_contenedor_nombre_input {
+
+	POSITION: relative; TEXT-ALIGN: right; MARGIN-TOP: 3px; WIDTH: 149px; FLOAT: left; MARGIN-RIGHT: 7px
+
+}
+
+#Form1 .FormRegistrar .SC_contenedor_imput {
+
+	MIN-WIDTH: 200px; MAX-WIDTH: 200px; FLOAT: left
+
+}
+
+#Form1 .FormRegistrar .SC_contenedor_imput > DIV {
+
+	MARGIN-TOP: 7px; WIDTH: 400px
+
+}
+
+#Form1 .FormRegistrar .SC_contenedor_imput > DIV > #lrs {
+
+	WIDTH: 400px
+
+}
+
+#Form1 .FormRegistrar .SC_contenedor_imput INPUT {
+
+	WIDTH: 100%
+
+}
+
+#Form1 .FormRegistrar .sidetip {
+
+	POSITION: relative; MARGIN-TOP: 7px; WIDTH: 250px; FLOAT: left; MARGIN-LEFT: 7px
+
+}
+
+#Form1 .FormRegistrar .sidetip P {
+
+	MARGIN: 0px 0px 0px 13px
+
+}
+
+.FormRegistrar DIV .SC_Css_Ayuda {
+
+	POSITION: static; MARGIN: 0px 0px 7px; PADDING-LEFT: 39px; FLOAT: left; LETTER-SPACING: 0.1em; FONT-SIZE: 11px; PADDING-TOP: 13px
+
+}
+
+.contenedor_botones_confirmación_de_formulario {
+
+	MARGIN-TOP: 27px; MARGIN-LEFT: auto; MARGIN-RIGHT: auto
+
+}
+
+.contenedor_botones_confirmación_de_formulario DIV {
+
+	TEXT-ALIGN: left; WIDTH: 530px
+
+}
+
+#SC_btn_verde {
+
+	BACKGROUND-COLOR: #00a924; COLOR: #fff
+
+}
+
+#SC_btn_verde:hover {
+
+	BACKGROUND-COLOR: #ccc; COLOR: #000
+
+}
+
+.FormRegistrar .SC_contenedor_imput BUTTON {
+
+	LINE-HEIGHT: 0; BACKGROUND-COLOR: #af1316; WIDTH: 200px; FLOAT: left; LETTER-SPACING: 0.1em; HEIGHT: 37px; COLOR: #fff; FONT-SIZE: 15px
+
+}
+
+.FormRegistrar .SC_contenedor_imput BUTTON:hover {
+
+	BACKGROUND-COLOR: #ccc; COLOR: #000
+
+}
+
+.FormRegistrar DIV .btn_cancelar_registro {
+
+	TEXT-ALIGN: center; LINE-HEIGHT: 35px; WIDTH: 200px; FLOAT: left; LETTER-SPACING: 0.1em; HEIGHT: 37px; MARGIN-LEFT: 9px
+
+}
+
+.FormRegistrar DIV .btn_cancelar_registro A {
+
+	COLOR: #af1316; FONT-WEIGHT: bold; TEXT-DECORATION: underline
+
+}
+
+.FormRegistrar DIV .btn_cancelar_registro A:hover {
+
+	COLOR: #ccc
+
+}
+
+footer .Css_logoiCCorp {
+
+	BACKGROUND-IMAGE: url(/App_themes/images/Empresas/LogoICMarket.jpg); WIDTH: 308px; BACKGROUND-REPEAT: no-repeat; HEIGHT: 100px
+
+}
+
+footer .Css_logoiCCorp P {
+
+	DISPLAY: none
+
+}
+
+
+
+footer UL {
+
+	LIST-STYLE-TYPE: none; DISPLAY: inline-block
+
+}
+
+footer UL LI {
+
+	PADDING-LEFT: 10px; FLOAT: left
+
+}
+
+footer > DIV P.datos-contacto {
+
+	TEXT-ALIGN: right; MARGIN-RIGHT: 20px
+
+}
+
