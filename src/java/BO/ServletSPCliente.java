@@ -48,7 +48,7 @@ public class ServletSPCliente extends HttpServlet {
             String variable = request.getParameter("mod");
             
             String rutCli=request.getParameter("txt_cliente_rut");
-             out.print(rutCli);
+             
             String razonSocial=request.getParameter("txt_cliente_nombre");
             String contacto=request.getParameter("txt_cliente_contacto");
             String direccion=request.getParameter("txt_cliente_direccion");
@@ -65,6 +65,8 @@ public class ServletSPCliente extends HttpServlet {
             String casilla=request.getParameter("txt_cliente_casilla");
             
             String dv="";
+            out.print(rutCli);
+            out.print(estado);
             try{
                 dv=rutCli.substring(rutCli.indexOf("-")+1,rutCli.length());
                 rutCli=rutCli.substring(0,rutCli.indexOf("-"));

@@ -494,3 +494,12 @@ font-family:Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
 #tblDistribucion{
     width: 800px;
 }
+
+/*
+Estilo para los inputs con readonly con apariencia de disabled
+*/
+.readonly{
+    background-color: #f0f0f0;
+    border: 1px solid #cccccc;
+    color: #6d6d6d;
+}

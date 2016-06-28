@@ -25,11 +25,13 @@
     width: 140px;
     height: 60px;
 }
+
 #pestana{
     width:100%; 
     height:20px; 
     background-color:#0d4299;
 }
+
 #piePagina
 {
     font-size: 12px;
@@ -63,11 +65,48 @@ a.link{
     text-decoration: none;
     font-family:Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
 }
+
 a.link:hover {
     color: #FF0000;
     text-decoration: none;
     font-family:Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
 }
+
+ul.menu{
+    width:100%; 
+    height:20px; 
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+ul.menu li {
+    float: left;
+}
+ul.menu li.submenu{
+    display: inline-block;
+}
+
+.submenu-contenido{
+    background-color: #0d4299;
+    display: none;
+    position: absolute;
+    min-width: 10px;
+    margin-top: 15px;
+    padding-top: 5px;
+}
+.submenu-contenido a {
+    border-top: #ffffff 1px solid;
+    float: none;
+    text-decoration: none;
+    text-align: left;
+    display: block;
+}
+.submenu:hover .submenu-contenido {
+    display: block;
+}
+
+
 a.email:link{
     font-size: 12px;
     text-align:right; 
@@ -454,4 +493,13 @@ font-family:Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
 }
 #tblDistribucion{
     width: 800px;
+}
+
+/*
+Estilo para los inputs con readonly con apariencia de disabled
+*/
+.readonly{
+    background-color: #f0f0f0;
+    border: 1px solid #cccccc;
+    color: #6d6d6d;
 }

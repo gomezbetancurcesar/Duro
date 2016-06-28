@@ -43,9 +43,11 @@ function Clientes(id){
     var mod = "";
     if (id === 1)
     {	
-        mod = "ingreso";
-    } if(id==3){
-        mod="Consultar";
+        mod = "insert";
+    }
+    
+    if(id==3){
+        mod="select";
         var boton=$("#btn_Cliente_Ingresar");
         var rutCli = $("#txt_cliente_rut").val();
 	var nomCli = $("#txt_cliente_nombre").val();
@@ -58,35 +60,45 @@ function Clientes(id){
 		data : "mod="+mod+"&txt_cliente_rut="+rutCli+"&txt_cliente_nombre="+nomCli+"&txt_cliente_contacto="+contacto+
                         "&txt_cliente_direccion="+direccion+"&txt_cliente_ejecutivo="+nomEje+"&txt_cliente_estado="+estado,
 		type : 'POST',
-		dataType : "html"});
-            
-    }if(id === 2)
-    {
-        mod= "modifica";
+		dataType : "html"
+        });
     }
-	//var rut = "";
-        //rut = $("#txt_cliente_rut").val();
-	var rutCli = $("#txt_cliente_rut").val();
-	var nomCli = $("#txt_cliente_nombre").val();
-        var contacto = $("#txt_cliente_contacto").val();
-	var direccion = $("#txt_cliente_direccion").val();
-	var nomEje = $("#txt_cliente_ejecutivo").val();
-	var estado = $("#txt_cliente_estado").val();
-        
-	$.ajax({
-		url : 'ServletSPCliente', 
-		data : "mod="+mod+"&txt_cliente_rut="+rutCli+"&txt_cliente_nombre="+nomCli+"&txt_cliente_contacto="+contacto+
-                        "&txt_cliente_direccion="+direccion+"&txt_cliente_ejecutivo="+nomEje+"&txt_cliente_estado="+estado,
-		type : 'POST',
-		dataType : "html",
-		success : function(data){
-                    window.location.href="svm_Seleccion_Clientes.jsp";
-		},
-                error:function(error){
-                    alert(error.responseText);
-                    console.log(error);
-                }
-	});
+    
+    if(id === 2)
+    {
+        mod= "update";
+    }
+    
+    $.ajax({
+            url : 'ServletSPCliente',
+            data:{
+                mod: mod,
+                txt_cliente_codigo: $("#txt_cliente_codigo").val(),
+                txt_cliente_rut: $("#txt_cliente_rut").val(),
+                txt_cliente_nombre : $("#txt_cliente_nombre").val(),
+                txt_sigla_cliente : $("#txt_sigla_cliente").val(),
+                txt_cliente_direccion: $("#txt_sigla_cliente").val(),
+                txt_cliente_comuna: $("#txt_cliente_comuna").val(),
+                txt_cliente_ciudad: $("#txt_cliente_ciudad").val(),
+                txt_cliente_fono1: $("#txt_cliente_fono1").val(),
+                txt_cliente_fono2: $("#txt_cliente_fono2").val(),
+                txt_cliente_fax: $("#txt_cliente_fax").val(),
+                txt_cliente_rubro: $("#txt_cliente_rubro").val(),
+                txt_cliente_contacto: $("#txt_cliente_contacto").val(),
+                txt_cliente_casilla: $("#txt_cliente_casilla").val(),
+                txt_cliente_ejecutivo: $("#txt_cliente_ejecutivo").val(),
+                txt_cliente_estado: $("#txt_cliente_estado").val()
+            },
+            type : 'POST',
+            dataType : "html",
+            success : function(data){
+                window.location.href="svm_Seleccion_Clientes.jsp";
+            },
+            error:function(error){
+                alert(error.responseText);
+                console.log(error);
+            }
+    });
 
 }
 function filtrarCliente()

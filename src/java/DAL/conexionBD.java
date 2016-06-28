@@ -16,7 +16,7 @@ public class conexionBD {
            String user = "root";//(String)env.lookup("user");//root
            String pass = "123456";//(String)env.lookup("pass");//admin
            String driverClassName = "com.mysql.jdbc.Driver";
-           String driverUrl = "jdbc:mysql://192.168.255.4:3306/sisventasmetal";
+           String driverUrl = "jdbc:mysql://127.0.0.1/sisventasmetal";
            Class.forName(driverClassName);
            con = DriverManager.getConnection(driverUrl, user, pass);
         }
