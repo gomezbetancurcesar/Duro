@@ -65,8 +65,6 @@ public class ServletSPCliente extends HttpServlet {
             String casilla=request.getParameter("txt_cliente_casilla");
             
             String dv="";
-            out.print(rutCli);
-            out.print(estado);
             try{
                 dv=rutCli.substring(rutCli.indexOf("-")+1,rutCli.length());
                 rutCli=rutCli.substring(0,rutCli.indexOf("-"));
@@ -76,7 +74,7 @@ public class ServletSPCliente extends HttpServlet {
             estado=estado.replace("NaN", "");
             String estadoSend=estado.equals("X_X")?"":estado;
             
-            System.out.println("opcion: "+variable+" rut: "+rutCli+" nombre: "+razonSocial+" estado: "+estadoSend);
+            //System.out.println("opcion: "+variable+" rut: "+rutCli+" nombre: "+razonSocial+" estado: "+estadoSend);
             
             try{
                 _connMy = conexionBD.Conectar((String)s.getAttribute("organizacion"));             
@@ -103,7 +101,6 @@ public class ServletSPCliente extends HttpServlet {
                 sp_usu.registerOutParameter(1, Types.VARCHAR);
                 
                 sp_usu.execute();  
-                System.out.println(rutCli);
                 String valorSalida = sp_usu.getString(1);                
                 
                 final ResultSet rs = sp_usu.getResultSet();
