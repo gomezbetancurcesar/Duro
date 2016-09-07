@@ -92,48 +92,50 @@ function Actividad()
         <!--botones pestañas -->
         <tr>
             <td colspan="5" > 
-              <div id="pestana">
+               <div id="pestana">
                     <ul class="menu">
-                    <li>
-                        <a class="link" href="svm_Escritorio.jsp" onclick="CambioEsc(cambio)" target="FrGral">
-                          Escritorio
-                        </a>
-                    </li>
-                    <li class="submenu">
-                        <a class="link" href="#" onclick="return false;" target="FrGral">
-                          Documentos
-                        </a>
-                        <div class="submenu-contenido">
-                            <a class="link" href="svm_Seleccion_Cotizacion.jsp" onclick="CambioAct(cambio)" target="FrGral">
-                              Cotizaciones 
-                            </a>      
-                            <a class="link" href="svm_Seleccion_OT.jsp" onclick="CambioTaller(cambio)" target="FrGral">
-                              Ordenes Taller 
-                            </a>  
-                        </div>
-                    </li>
-                    <li>
-                        <a class="link" href="svm_Seleccion_Clientes.jsp" onclick="CambioCli(cambio)" name="clientes"target="FrGral">
-                          Clientes
-                        </a>
+                        <li>
+                            <a class="link" href="svm_Escritorio.jsp" onclick="CambioEsc(cambio)" target="FrGral">
+                                Escritorio
+                            </a>
+                        </li>
+                        <li class="submenu">
+                            <a class="link" href="svm_Escritorio.jsp" onclick="CambioEsc(cambio)" target="FrGral">
+                                Documentos
+                            </a>
+                         <div class="submenu-contenido">
+                                <a class="link" href="svm_Seleccion_Cotizacion.jsp" onclick="CambioAct(cambio)" target="FrGral">
+                                    Cotizaciones
+                                </a>      
+                                <a class="link" href="svm_Seleccion_OT.jsp" onclick="CambioTaller(cambio)" target="FrGral">
+                                    Ordenes Taller 
+                                </a>  
+                            </div>
                     </li>
                     <li>
-                        <a class="link" href="svm_Mantencion_Configuracion.jsp"  onclick="CambioConf(cambio)" name="configuracion" target="FrGral">
-                          Configuraci&oacute;n
-                        </a>
-                    </li>
-                    <li>
-                        <a class="link" href="svm_Escritorio.jsp" onclick="CambioEsc(cambio)" target="FrGral">
-                          Informes
-                        </a>
-                    </li>
-                    <li>
-                        <a class="link" href="svm_Escritorio.jsp" onclick="CambioEsc(cambio)" target="FrGral">
-                          Procesos
-                        </a>
-                    </li>
+                            <a class="link" href="svm_Seleccion_Clientes.jsp" onclick="CambioCli(cambio)" name="clientes"target="FrGral">
+                                Clientes
+                            </a>
+                        </li>
+                        <li>
+                    <a class="link" href="<%=tipoUser.equals("Administrador")?"svm_Mantencion_Configuracion.jsp":"#"%>" 
+                           onclick="<%=tipoUser.equals("Administrador")?"CambioConf(cambio)":"alert('No tiene Los permisos para ver esta pagina');"%>" 
+                           name="confi" target="FrGral">
+                        Configuraci&oacute;n
+                    </a>
+                        </li>
+                           <li>
+                    <a class="link" href="svm_Escritorio.jsp" onclick="CambioEsc(cambio)" target="FrGral">
+                        Informes
+                    </a>
+                           </li>
+                           <li>
+                    <a class="link" href="svm_Escritorio.jsp" onclick="CambioEsc(cambio)" target="FrGral">
+                        Procesos
+                    </a>
+                           </li>
                     </ul>
-            </div>
+                </div>
             </td>
         </tr>
         <tr style="height: 40px">	

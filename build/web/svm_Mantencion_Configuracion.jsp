@@ -78,41 +78,37 @@ pageEncoding="ISO-8859-1"%>
                                     </thead>                                                                      
                                     <tbody>                                           
                                         <%
+                                            int cont =0;
                                             String var = "consulta_N";
-                                            try{
-                                                int cont =0;
-                                                CallableStatement sp_usu = _connMy.prepareCall("{call sp_mae_usuarios(?,'','','','','','')}");
-                                                sp_usu.setString(1,var);
-                                                sp_usu.execute();
-                                                final ResultSet rs = sp_usu.getResultSet();
-                                                String cla = "";
-                                                while(rs.next())
-                                                {
+                                            CallableStatement sp_usu = _connMy.prepareCall("{call sp_mae_usuarios(?,'','','','','','')}");
+                                            sp_usu.setString(1,var);
+                                            sp_usu.execute();
+                                            final ResultSet rs = sp_usu.getResultSet();
+                                            String cla = "";
+                                            while(rs.next())
+                                            {
                                                     if(cont % 2 == 0)
                                                     {                                                        
                                                         cla = "alt";
                                                     }
                                                     out.println("<tr id='filaUsr"+cont+"' class='"+cla+"'>");
-                                                    %>                                                                           
-                                                    <td>
-                                                        <a id="datoUsr" href="javascript: onclick=habilitaModUsr(<%=cont%>)"> >></a>
-                                                        <input type="hidden" id="habilitaUsr" value="0" />
-                                                    </td>
+                                        %>                                                                           
+                                            <td>
+                                                <a id="datoUsr" href="javascript: onclick=habilitaModUsr(<%=cont%>)"> >></a>
+                                                <input type="hidden" id="habilitaUsr" value="0" />
+                                            </td>
+                                        
+                                            <td id="usr_rutUsr<%=cont%>"><%= rs.getString("rut")%></td>
+                                            <td id="usr_nomUsr<%=cont%>"><%= rs.getString("nombre_user")%></td>
+                                            <td id="usr_pass<%=cont%>"><%= rs.getString("password")%></td>
+                                            <td id="usr_tipo<%=cont%>"><%= rs.getString("tipo")%></td>
+                                            <td id="usr_tipoNeg<%=cont%>"><%= rs.getString("tipo_negocio")%></td>
+                                            <td id="usr_supervisor<%=cont%>"><%= rs.getString("supervisor")%></td>
 
-                                                    <td id="usr_rutUsr<%=cont%>"><%= rs.getString("rut")%></td>
-                                                    <td id="usr_nomUsr<%=cont%>"><%= rs.getString("nombre_user")%></td>
-                                                    <td id="usr_pass<%=cont%>"><%= rs.getString("password")%></td>
-                                                    <td id="usr_tipo<%=cont%>"><%= rs.getString("tipo")%></td>
-                                                    <td id="usr_tipoNeg<%=cont%>"><%= rs.getString("tipo_negocio")%></td>
-                                                    <td id="usr_supervisor<%=cont%>"><%= rs.getString("supervisor")%></td>
-                                                    <%
-                                                    out.println("</tr>");                                   
-                                                    cont ++;
-                                                    cla = "";
-                                                }
-                                            }catch(Exception e){
-                                                e.printStackTrace();
-                                                System.out.println("error");
+                                        <%   
+                                                out.println("</tr>");                                   
+                                                cont ++;
+                                                cla = "";
                                             }
                                         %>  
                                     </tbody>
@@ -141,51 +137,41 @@ pageEncoding="ISO-8859-1"%>
                                         <td class="letra">Tipo:</td>
                                         <td class="letra">
                                             <select id="slt_usr_tipo" name="slt_usr_tipo">
-                                                <option value="">--Selecione--</option>
+                                                 <option value="">--Selecione--</option>
                                                 <%
-                                                    String CargaTpo;
-                                                    CallableStatement sp_CargaCombo_Tipo;
-                                                    try{
-                                                        CargaTpo = "Tipo Usuario";
-                                                        sp_CargaCombo_Tipo = _connMy.prepareCall("{call sp_CargaCombo(?,'','')}");
-                                                        sp_CargaCombo_Tipo.setString(1,CargaTpo);
-                                                        sp_CargaCombo_Tipo.execute();
-                                                        final ResultSet CargarTipo = sp_CargaCombo_Tipo.getResultSet();                                                   
-                                                        while(CargarTipo.next())
-                                                        {             
-                                                            %>
-                                                            <option value="<%=CargarTipo.getString("descripcion")%>"><%=CargarTipo.getString("descripcion")%></option>
-                                                            <%                                                       
-                                                        }
-                                                    }catch(Exception e){
-                                                        e.printStackTrace();
-                                                        System.out.println("error");
+                                                    String CargaTpo = "Tipo Usuario";
+                                                    
+                                                    CallableStatement sp_CargaCombo_Tipo = _connMy.prepareCall("{call sp_CargaCombo(?,'','')}");
+                                                    sp_CargaCombo_Tipo.setString(1,CargaTpo);
+                                                    sp_CargaCombo_Tipo.execute();
+                                                    final ResultSet CargarTipo = sp_CargaCombo_Tipo.getResultSet();                                                   
+                                                    while(CargarTipo.next())
+                                                    {             
+                                                %>
+                                                <option value="<%=CargarTipo.getString("descripcion")%>"><%=CargarTipo.getString("descripcion")%></option>
+                                                <%                                                       
                                                     }
                                                 %>
-                                                </select>
+                                                 </select>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="letra">Tipo Negocio:</td>
                                         <td class="letra">
                                             <select id="slt_usr_tipoNegocio" name="slt_usr_tipoNegocio">
-                                                <option value="">--Selecione--</option>
+                                                 <option value="">--Selecione--</option>
                                                 <%
-                                                    try{
-                                                        CargaTpo = "Tipo Negocio";
-                                                        sp_CargaCombo_Tipo = _connMy.prepareCall("{call sp_CargaCombo(?,'','')}");
-                                                        sp_CargaCombo_Tipo.setString(1,CargaTpo);
-                                                        sp_CargaCombo_Tipo.execute();
-                                                        final ResultSet CargarTipoNegocio = sp_CargaCombo_Tipo.getResultSet();                                                   
-                                                        while(CargarTipoNegocio.next())
-                                                        {             
-                                                            %>
-                                                            <option value="<%=CargarTipoNegocio.getString("descripcion")%>"><%=CargarTipoNegocio.getString("descripcion")%></option>
-                                                            <%                                                       
-                                                        }
-                                                    }catch(Exception e){
-                                                        e.printStackTrace();
-                                                        System.out.println("error");
+                                                    CargaTpo = "Tipo Negocio";
+                                                    
+                                                    sp_CargaCombo_Tipo = _connMy.prepareCall("{call sp_CargaCombo(?,'','')}");
+                                                    sp_CargaCombo_Tipo.setString(1,CargaTpo);
+                                                    sp_CargaCombo_Tipo.execute();
+                                                    final ResultSet CargarTipoNegocio = sp_CargaCombo_Tipo.getResultSet();                                                   
+                                                    while(CargarTipoNegocio.next())
+                                                    {             
+                                                %>
+                                                <option value="<%=CargarTipoNegocio.getString("descripcion")%>"><%=CargarTipoNegocio.getString("descripcion")%></option>
+                                                <%                                                       
                                                     }
                                                 %>
                                             </select>
@@ -195,25 +181,20 @@ pageEncoding="ISO-8859-1"%>
                                         <td class="letra">Supervisor:</td>
                                         <td class="letra">
                                             <select id="slt_usr_supervisor" name="slt_usr_supervisor">
-                                                <option value="">--Selecione--</option>
+                                                 <option value="">--Selecione--</option>
                                                 <%
-                                                    try{
-                                                        Statement stmt = null;
-                                                        ResultSet rsStmt = null;
-                                                        stmt = _connMy.createStatement();
-                                                        rsStmt = stmt.executeQuery("SELECT rut,nombre_user FROM svm_mae_usuarios where tipo = 'Supervisor'");                                                                                         
-                                                        while(rsStmt.next())
-                                                        {             
-                                                            %>
-                                                            <option value="<%=rsStmt.getString("rut")%>"><%=rsStmt.getString("nombre_user")%></option>
-                                                            <%
-                                                        }
-                                                    }catch(Exception e){
-                                                        e.printStackTrace();
-                                                        System.out.println("error");
-                                                    }
+                                                    Statement stmt = null;
+                                                    ResultSet rsStmt = null;
+                                                    stmt = _connMy.createStatement();
+                                                    rsStmt = stmt.executeQuery("SELECT rut,nombre_user FROM svm_mae_usuarios where tipo = 'Supervisor'");                                                                                         
+                                                    while(rsStmt.next())
+                                                    {             
                                                 %>
-                                            </select>
+                                                        <option value="<%=rsStmt.getString("rut")%>"><%=rsStmt.getString("nombre_user")%></option>
+                                                <%                                                       
+                                                    }                                                     
+                                                %>
+                                            </select>                         
                                         </td>
                                     </tr>
                                         <tr>
@@ -248,43 +229,37 @@ pageEncoding="ISO-8859-1"%>
                                             <th>Relación 2</th>
                                             <th>Descripción</th>
                                         </tr>
-                                    </thead>
+                                    </thead>       
                                     <tbody>
-                                        <%
-                                            try{
-                                                CallableStatement sp_Tabla = _connMy.prepareCall("{call sp_mae_tablas(?,0,'','','','')}");
-                                                sp_Tabla.setString(1,var);
-                                                sp_Tabla.execute();
-                                                final ResultSet rsTabla = sp_Tabla.getResultSet();
-                                                String claTabla = "";
-                                                contTabla=0;
-                                                while(rsTabla.next())
-                                                {
-                                                    if(contTabla % 2 == 0)
-                                                    {                                                    
-                                                        claTabla = "alt";
-                                                    }else
-                                                    {  
-                                                        claTabla = "";                                                    
-                                                    }
-                                                    out.println("<tr id='filaTabla"+contTabla+"' class='"+claTabla+"'>");
-                                                    %>
-                                                    <td> 
-                                                        <a id="datoUsr" href="javascript: onclick=habilitaModTabla(<%=contTabla%>)"> >></a>
-                                                        <input type="hidden" id="habilitaTabla" value="0" />
-                                                    </td>
-                                                    <input type="hidden" id="tabla_Id<%=contTabla%>" value="<%= rsTabla.getString("id")%>"/>
-                                                    <td id="tabla_TablaMae<%=contTabla%>"><%= rsTabla.getString("tablas")%></td>
-                                                    <td id="tabla_Relacion1<%=contTabla%>"><%= rsTabla.getString("relacion1")%></td>
-                                                    <td id="tabla_Relacion2<%=contTabla%>"><%= rsTabla.getString("relacion2")%></td>
-                                                    <td id="tabla_descripcion<%=contTabla%>"><%= rsTabla.getString("descripcion")%></td>
-                                                    <%
-                                                    out.println("</tr>");                                   
-                                                    contTabla ++;
+                                        <%                                           
+                                            CallableStatement sp_Tabla = _connMy.prepareCall("{call sp_mae_tablas(?,0,'','','','')}");
+                                            sp_Tabla.setString(1,var);
+                                            sp_Tabla.execute();
+                                            final ResultSet rsTabla = sp_Tabla.getResultSet();
+                                            String claTabla = "";;
+                                            while(rsTabla.next())
+                                            {
+                                                if(contTabla % 2 == 0)
+                                                {                                                    
+                                                    claTabla = "alt";
+                                                }else
+                                                {  
+                                                    claTabla = "";                                                    
                                                 }
-                                            }catch(Exception e){
-                                                e.printStackTrace();
-                                                System.out.println("error");
+                                                out.println("<tr id='filaTabla"+contTabla+"' class='"+claTabla+"'>");
+                                        %>                                       
+                                            <td> 
+                                                <a id="datoUsr" href="javascript: onclick=habilitaModTabla(<%=contTabla%>)"> >></a>
+                                                <input type="hidden" id="habilitaTabla" value="0" />
+                                            </td>
+                                            <input type="hidden" id="tabla_Id<%=contTabla%>" value="<%= rsTabla.getString("id")%>"/>
+                                            <td id="tabla_TablaMae<%=contTabla%>"><%= rsTabla.getString("tablas")%></td>
+                                            <td id="tabla_Relacion1<%=contTabla%>"><%= rsTabla.getString("relacion1")%></td>
+                                            <td id="tabla_Relacion2<%=contTabla%>"><%= rsTabla.getString("relacion2")%></td>
+                                            <td id="tabla_descripcion<%=contTabla%>"><%= rsTabla.getString("descripcion")%></td>
+                                       <%   
+                                                out.println("</tr>");                                   
+                                                contTabla ++;
                                             }
                                         %>                                       
                                     </tbody>
@@ -300,28 +275,20 @@ pageEncoding="ISO-8859-1"%>
                                         <td class="letra">Tablas:</td>
                                         <input type="hidden" id="hid_tabla_id" name="hid_tabla_id" value="0"/>
                                         <td class="letra">
-                                            <%
-                                                CallableStatement sp_Carga;
-                                                String CargaTabla;
-                                            %>
+                                            
                                             <select id="slt_tabla_mae" name="slt_tabla_mae">
                                                 <option value="">--Selecione--</option>
                                                 <%
-                                                    try{
-                                                        CargaTabla = "maeTabla";                                                    
-                                                        sp_Carga = _connMy.prepareCall("{call sp_ConsultaMaeTabla(?)}");
-                                                        sp_Carga.setString(1,CargaTabla);
-                                                        sp_Carga.execute();
-                                                        final ResultSet CargarMaeTabla = sp_Carga.getResultSet();                                                   
-                                                        while(CargarMaeTabla.next())
-                                                        {             
-                                                            %>
-                                                            <option value="<%=CargarMaeTabla.getString("tablas")%>"><%=CargarMaeTabla.getString("tablas")%></option>
-                                                            <%                                                       
-                                                        }
-                                                    }catch(Exception e){
-                                                        e.printStackTrace();
-                                                        System.out.println("Error");
+                                                    String CargaTabla = "maeTabla";                                                    
+                                                    CallableStatement sp_Carga = _connMy.prepareCall("{call sp_ConsultaMaeTabla(?)}");
+                                                    sp_Carga.setString(1,CargaTabla);
+                                                    sp_Carga.execute();
+                                                    final ResultSet CargarMaeTabla = sp_Carga.getResultSet();                                                   
+                                                    while(CargarMaeTabla.next())
+                                                    {             
+                                                %>
+                                                <option value="<%=CargarMaeTabla.getString("tablas")%>"><%=CargarMaeTabla.getString("tablas")%></option>
+                                                <%                                                       
                                                     }
                                                 %>
                                             </select>
@@ -337,26 +304,21 @@ pageEncoding="ISO-8859-1"%>
                                             <select id="slt_tabla_rel1" name="slt_tabla_rel1">                                
                                                 <option value="">--Selecione--</option>
                                                 <%
-                                                    try{
-                                                        CargaTabla ="rel1";
-                                                        sp_Carga = _connMy.prepareCall("{call sp_ConsultaMaeTabla(?)}");
-                                                        sp_Carga.setString(1,CargaTabla);
-                                                        sp_Carga.execute();
-                                                        final ResultSet CargarRel1 = sp_Carga.getResultSet();
-                                                        while(CargarRel1.next())
-                                                        {
-                                                            if(!CargarRel1.getString("relacion1").equals(""))
-                                                            {          
-                                                                %>
-                                                                <option value="<%=CargarRel1.getString("relacion1")%>"><%=CargarRel1.getString("relacion1")%></option>
-                                                                <%
-                                                            }
+                                                    CargaTabla ="rel1";
+                                                    sp_Carga = _connMy.prepareCall("{call sp_ConsultaMaeTabla(?)}");
+                                                    sp_Carga.setString(1,CargaTabla);
+                                                    sp_Carga.execute();
+                                                    final ResultSet CargarRel1 = sp_Carga.getResultSet();
+                                                    while(CargarRel1.next())
+                                                    {
+                                                        if(!CargarRel1.getString("relacion1").equals(""))
+                                                        {          
+                                                %>
+                                                <option value="<%=CargarRel1.getString("relacion1")%>"><%=CargarRel1.getString("relacion1")%></option>
+                                                <%
                                                         }
-                                                    }catch(Exception e){
-                                                        e.printStackTrace();
-                                                        System.out.println("error");
                                                     }
-                                                    %>
+                                                %>
                                             </select>
                                         </td>
                                         <td class="letra">
@@ -369,26 +331,21 @@ pageEncoding="ISO-8859-1"%>
                                             <select id="slt_tabla_rel2" name="slt_tabla_rel2">
                                                 <option value="">--Selecione--</option>
                                                 <%
-                                                    try{
-                                                        CargaTabla ="rel2";
-                                                        sp_Carga = _connMy.prepareCall("{call sp_ConsultaMaeTabla(?)}");
-                                                        sp_Carga.setString(1,CargaTabla);
-                                                        sp_Carga.execute();
-                                                        final ResultSet CargarRel2 = sp_Carga.getResultSet();
-                                                        while(CargarRel2.next())
-                                                        { 
-                                                            if(!CargarRel2.getString("relacion2").equals(""))
-                                                            {                                                       
-                                                                %>
-                                                                <option value="<%=CargarRel2.getString("relacion2")%>"><%=CargarRel2.getString("relacion2")%></option>
-                                                                <%
-                                                            }
+                                                    CargaTabla ="rel2";
+                                                    sp_Carga = _connMy.prepareCall("{call sp_ConsultaMaeTabla(?)}");
+                                                    sp_Carga.setString(1,CargaTabla);
+                                                    sp_Carga.execute();
+                                                    final ResultSet CargarRel2 = sp_Carga.getResultSet();
+                                                    while(CargarRel2.next())
+                                                    { 
+                                                        if(!CargarRel2.getString("relacion2").equals(""))
+                                                        {                                                       
+                                                %>
+                                                <option value="<%=CargarRel2.getString("relacion2")%>"><%=CargarRel2.getString("relacion2")%></option>
+                                                <%
                                                         }
-                                                    }catch(Exception e){
-                                                        e.printStackTrace();
-                                                        System.out.println("error");
                                                     }
-                                                    %>
+                                                %>
                                             </select>
                                         </td>
                                         <td class="letra">
@@ -421,48 +378,43 @@ pageEncoding="ISO-8859-1"%>
                                 <table id="tblWork">
                                     <thead>
                                         <tr>
-                                            <th></th>
+                                            <th></th>                                            
                                             <th>Estado Actual</th>
                                             <th>Estado Siguiente</th>
                                             <th>Rut Usuario</th>
                                         </tr>
-                                    </thead>
+                                    </thead>                                                                                      
                                     <tbody>
-                                       <%
-                                            int contWork =0;
-                                            try{
-                                                CallableStatement sp_Work = _connMy.prepareCall("{call sp_mae_workflow(?,0,'','','')}");
-                                                sp_Work.setString(1,var);
-                                                sp_Work.execute();
-                                                final ResultSet rsWork = sp_Work.getResultSet();
-                                                String claseWork ="";
-                                                while(rsWork.next())
+                                       <%                                                            
+                                            int contWork =0;                                                    
+                                            CallableStatement sp_Work = _connMy.prepareCall("{call sp_mae_workflow(?,0,'','','')}");
+                                            sp_Work.setString(1,var);
+                                            sp_Work.execute();
+                                            final ResultSet rsWork = sp_Work.getResultSet();
+                                            String claseWork ="";
+                                            while(rsWork.next())
+                                            {
+                                                if(contWork % 2 == 0)
                                                 {
-                                                    if(contWork % 2 == 0)
-                                                    {
-                                                        claseWork = "alt";
-                                                    }else
-                                                    {  
-                                                        claseWork = "";
-                                                    }
-                                                    out.println("<tr id='filaWork"+contWork+"' class='"+claseWork+"'>");
-                                                    %> 
-                                                    <td>
-                                                        <a id="datoWork" href="javascript: onclick=habilitaModWork(<%=contWork%>)"> >></a>
-                                                        <input type="hidden" id="habilitaWork" value="0" />
-                                                    </td>
-                                                    <input type="hidden" id="work_id<%=contWork%>" value="<%=rsWork.getString("id")%>"/>
-            <!--                                         //<td id="work_Id<%--contWork%>"><%= rsWork.getString("id")--%></td>-->
-                                                    <td id="work_estAct<%=contWork%>"><%=rsWork.getString("estado_actual")%></td>
-                                                    <td id="work_estSig<%=contWork%>"><%=rsWork.getString("estado_siguiente")%></td>
-                                                    <td id="work_usr<%=contWork%>"><%=rsWork.getString("rut_usr")%></td>
-                                                    <%
-                                                    out.println("</tr>");
-                                                    contWork++;
+                                                    claseWork = "alt";
+                                                }else
+                                                {  
+                                                    claseWork = "";
                                                 }
-                                            }catch(Exception e){
-                                                e.printStackTrace();
-                                                System.out.println("error");
+                                               out.println("<tr id='filaWork"+contWork+"' class='"+claseWork+"'>");
+                                        %> 
+                                        <td>
+                                            <a id="datoWork" href="javascript: onclick=habilitaModWork(<%=contWork%>)"> >></a>
+                                            <input type="hidden" id="habilitaWork" value="0" />
+                                        </td>
+                                        <input type="hidden" id="work_id<%=contWork%>" value="<%=rsWork.getString("id")%>"/>
+<!--                                         //<td id="work_Id<%--contWork%>"><%= rsWork.getString("id")--%></td>-->
+                                        <td id="work_estAct<%=contWork%>"><%=rsWork.getString("estado_actual")%></td>
+                                        <td id="work_estSig<%=contWork%>"><%=rsWork.getString("estado_siguiente")%></td>
+                                        <td id="work_usr<%=contWork%>"><%=rsWork.getString("rut_usr")%></td>
+                                        <%
+                                                out.println("</tr>");
+                                                contWork++;
                                             }
                                         %>
                                     </tbody>
@@ -481,24 +433,20 @@ pageEncoding="ISO-8859-1"%>
                                         <td  class="letra">
                                             <select name="slt_work_estAct" id="slt_work_estAct">
                                                 <option value="">--Seleccione--</option>
-                                                <%
-                                                    try{
-                                                        String varCargaEstado = "Estado_ActCom";
-                                                        CallableStatement sp_Carga_Estado = _connMy.prepareCall("{call sp_CargaCombo(?,'','')}");
-                                                        sp_Carga_Estado.setString(1,varCargaEstado);
-                                                        sp_Carga_Estado.execute();
-                                                        final ResultSet CargarEstado = sp_Carga_Estado.getResultSet();                                                   
-                                                        while(CargarEstado.next())
-                                                        {             
-                                                            %>
-                                                            <option value="<%=CargarEstado.getString("descripcion")%>"><%=CargarEstado.getString("descripcion")%></option>
-                                                            <%                                                       
-                                                        }
-                                                    }catch(Exception e){
-                                                        e.printStackTrace();
-                                                        System.out.println("error");
-                                                    }
-                                                %>
+                                               <%
+                                        String varCargaEstado = "Estado_ActCom";
+                                        
+                                        CallableStatement sp_Carga_Estado = _connMy.prepareCall("{call sp_CargaCombo(?,'','')}");
+                                        sp_Carga_Estado.setString(1,varCargaEstado);
+                                        sp_Carga_Estado.execute();
+                                        final ResultSet CargarEstado = sp_Carga_Estado.getResultSet();                                                   
+                                        while(CargarEstado.next())
+                                        {             
+                                    %>
+                                            <option value="<%=CargarEstado.getString("descripcion")%>"><%=CargarEstado.getString("descripcion")%></option>
+                                    <%                                                       
+                                        }
+                                    %>
                                             </select>
                                         </td>
                                     </tr>
@@ -508,23 +456,19 @@ pageEncoding="ISO-8859-1"%>
                                         <select name="slt_work_estSig" id="slt_work_estSig">
                                         <option value="">--Seleccione--</option>
                                         <%
-                                            try{
-                                                String carga_Estado = "Estado_ActCom";
-                                                CallableStatement sp_Carga_Siguiente = _connMy.prepareCall("{call sp_CargaCombo(?,'','')}");
-                                                sp_Carga_Siguiente.setString(1,carga_Estado);
-                                                sp_Carga_Siguiente.execute();
-                                                final ResultSet CargarSiguiente = sp_Carga_Siguiente.getResultSet();                                                   
-                                                while(CargarSiguiente.next())
-                                                {             
-                                                    %>
-                                                    <option value="<%=CargarSiguiente.getString("descripcion")%>"><%=CargarSiguiente.getString("descripcion")%></option>
-                                                    <%                                                       
-                                                }
-                                            }catch(Exception e){
-                                                e.printStackTrace();
-                                                System.out.println("error");
-                                            }
-                                        %>
+                                        String carga_Estado = "Estado_ActCom";
+                                        
+                                        CallableStatement sp_Carga_Siguiente = _connMy.prepareCall("{call sp_CargaCombo(?,'','')}");
+                                        sp_Carga_Siguiente.setString(1,carga_Estado);
+                                        sp_Carga_Siguiente.execute();
+                                        final ResultSet CargarSiguiente = sp_Carga_Siguiente.getResultSet();                                                   
+                                        while(CargarSiguiente.next())
+                                        {             
+                                    %>
+                                            <option value="<%=CargarSiguiente.getString("descripcion")%>"><%=CargarSiguiente.getString("descripcion")%></option>
+                                    <%                                                       
+                                        }
+                                    %>
                                         </select>
                                     </td>
                                 </tr>
@@ -563,37 +507,33 @@ pageEncoding="ISO-8859-1"%>
                                     <tbody>
                                         <%                                                            
                                             int contNot =0;
-                                            try{
-                                                CallableStatement sp_Not = _connMy.prepareCall("{call sp_mae_notificaciones(?,'','','')}");
-                                                sp_Not.setString(1,var);
-                                                sp_Not.execute();
-                                                final ResultSet rsNot = sp_Not.getResultSet();
-                                                String claNot = "";
-                                                while(rsNot.next())
+                                            CallableStatement sp_Not = _connMy.prepareCall("{call sp_mae_notificaciones(?,'','','')}");
+                                            sp_Not.setString(1,var);
+                                            sp_Not.execute();
+                                            final ResultSet rsNot = sp_Not.getResultSet();
+                                            String claNot = "";
+                                            while(rsNot.next())
+                                            {
+                                                if(contNot % 2 == 0)
                                                 {
-                                                    if(contNot % 2 == 0)
-                                                    {
-                                                        claNot = "alt";
-                                                    }else
-                                                    {  
-                                                        claNot = "";
-                                                    }
-                                                    out.println("<tr id='filaNot"+contNot+"' class='"+claNot+"'>");
-                                                    %>    
-                                                    <td>
-                                                        <a id="datoNot" href="javascript: onclick=habilitaModNot(<%=contNot%>)"> >></a>
-                                                        <input type="hidden" id="habilitaNot" value="0" />
-                                                    </td>
-                                                    <td id='not_est<%=contNot%>'><%=rsNot.getString("estado")%></td>
-                                                    <td id='not_Usr<%=contNot%>'><%=rsNot.getString("nombre_usr")%></td>
-                                                    <td id='not_email<%=contNot%>'><%=rsNot.getString("email")%></td>
-                                                    <%
-                                                    out.println("</tr>");
-                                                    contNot++;
+                                                    claNot = "alt";
+                                                }else
+                                                {  
+                                                    claNot = "";
                                                 }
-                                            }catch(Exception e){
-                                                e.printStackTrace();
-                                                System.out.println("error");
+                                                out.println("<tr id='filaNot"+contNot+"' class='"+claNot+"'>");
+                                        %>    
+                                        <td>
+                                            <a id="datoNot" href="javascript: onclick=habilitaModNot(<%=contNot%>)"> >></a>
+                                            <input type="hidden" id="habilitaNot" value="0" />
+                                        </td>
+                                        <td id='not_est<%=contNot%>'><%=rsNot.getString("estado")%></td>
+                                        <td id='not_Usr<%=contNot%>'><%=rsNot.getString("nombre_usr")%></td>
+                                        <td id='not_email<%=contNot%>'><%=rsNot.getString("email")%></td>
+
+                                        <%
+                                                out.println("</tr>");
+                                                contNot++;
                                             }
                                         %>
                                     </tbody>
@@ -610,25 +550,21 @@ pageEncoding="ISO-8859-1"%>
                                         <td class="letra">
                                             <select id ='slt_not_est' name="slt_not_est">
                                                 <option value="">--Seleccione--</option>
-                                                <%
-                                                    try{
-                                                        String cargaEstado_Notificacion = "Estado_Notificacion";
-                                                        CallableStatement sp_CargaEstado_Notificacion = _connMy.prepareCall("{call sp_CargaCombo(?,'','')}");
-                                                        sp_CargaEstado_Notificacion.setString(1,cargaEstado_Notificacion);
-                                                        sp_CargaEstado_Notificacion.execute();
-                                                        final ResultSet CargarEstadoNotificacion = sp_CargaEstado_Notificacion.getResultSet();                                                   
-                                                        while(CargarEstadoNotificacion.next())
-                                                        {             
-                                                            %>
-                                                            <option value="<%=CargarEstadoNotificacion.getString("descripcion")%>"><%=CargarEstadoNotificacion.getString("descripcion")%></option>
-                                                            <%                                                       
-                                                        }
-                                                    }catch(Exception e){
-                                                        e.printStackTrace();
-                                                        System.out.println("error");
-                                                    }
-                                                %>
-                                            </select>
+                                                 <%
+                                        String cargaEstado_Notificacion = "Estado_Notificacion";
+                                        
+                                        CallableStatement sp_CargaEstado_Notificacion = _connMy.prepareCall("{call sp_CargaCombo(?,'','')}");
+                                        sp_CargaEstado_Notificacion.setString(1,cargaEstado_Notificacion);
+                                        sp_CargaEstado_Notificacion.execute();
+                                        final ResultSet CargarEstadoNotificacion = sp_CargaEstado_Notificacion.getResultSet();                                                   
+                                        while(CargarEstadoNotificacion.next())
+                                        {             
+                                    %>
+                                            <option value="<%=CargarEstadoNotificacion.getString("descripcion")%>"><%=CargarEstadoNotificacion.getString("descripcion")%></option>
+                                    <%                                                       
+                                        }
+                                    %>
+                                        </select>
                                         </td>
                                     </tr>
                                     <tr>
@@ -670,46 +606,41 @@ pageEncoding="ISO-8859-1"%>
                                             <th>Noticia</th>
                                             <th>Vigencia</th>
                                         </tr>
-                                    </thead>
+                                    </thead>                                                                                      
                                     <tbody>
-                                        <%
-                                            try{
-                                                int contEsc =0;
-                                                String varEsc = "consulta_N";
-                                                Date sqlDate= new Date(11/2/2015);
-                                                CallableStatement sp_Esc = _connMy.prepareCall("{call sp_mae_escritorio(?,?,'','','','')}");
-                                                sp_Esc.setString(1,varEsc);
-                                                sp_Esc.setDate(2,sqlDate);
-                                                sp_Esc.execute();
-                                                final ResultSet rsEsc = sp_Esc.getResultSet();
-                                                String claEsc = "";
-                                                while(rsEsc.next())
+                                        <%                                                            
+                                            int contEsc =0;
+                                            String varEsc = "consulta_N";
+                                            Date sqlDate= new Date(11/2/2015);
+                                            CallableStatement sp_Esc = _connMy.prepareCall("{call sp_mae_escritorio(?,?,'','','','')}");
+                                            sp_Esc.setString(1,varEsc);
+                                            sp_Esc.setDate(2,sqlDate);
+                                            sp_Esc.execute();
+                                            final ResultSet rsEsc = sp_Esc.getResultSet();
+                                            String claEsc = "";
+                                            while(rsEsc.next())
+                                            {
+                                                if(contEsc % 2 == 0)
                                                 {
-                                                    if(contEsc % 2 == 0)
-                                                    {
-                                                        claEsc = "alt";
-                                                    }else
-                                                    {  
-                                                        claEsc = "";
-                                                    }
-                                                    out.println("<tr id='filaEsc"+contEsc+"' class='"+claEsc+"'>");
-                                                    %> 
-                                                    <td>
-                                                        <a id="datoNot" href="javascript: onclick=habilitaModEsc(<%=contEsc%>)"> >></a>
-                                                        <input type="hidden" id="habilitaEsc" value="0" />
-                                                    </td>
-                                                    <td id="esc_autor<%=contEsc%>"><%=rsEsc.getString("autor")%></td>
-                                                    <td id="esc_fecha<%=contEsc%>"><%=rsEsc.getString("fecha")%></td>
-                                                    <td id="esc_titulo<%=contEsc%>"><%=rsEsc.getString("titulo")%></td>
-                                                    <td id="esc_noticia<%=contEsc%>"><%=rsEsc.getString("noticia")%></td>
-                                                    <td id="esc_vigencia<%=contEsc%>"><%=rsEsc.getString("vigencia")%></td>
-                                                    <%
-                                                    out.println("</tr>");
-                                                    contEsc++;
+                                                    claEsc = "alt";
+                                                }else
+                                                {  
+                                                    claEsc = "";
                                                 }
-                                            }catch(Exception e){
-                                                e.printStackTrace();
-                                                System.out.println("error");
+                                                out.println("<tr id='filaEsc"+contEsc+"' class='"+claEsc+"'>");
+                                        %> 
+                                        <td>
+                                            <a id="datoNot" href="javascript: onclick=habilitaModEsc(<%=contEsc%>)"> >></a>
+                                            <input type="hidden" id="habilitaEsc" value="0" />
+                                        </td>
+                                        <td id="esc_autor<%=contEsc%>"><%=rsEsc.getString("autor")%></td>
+                                        <td id="esc_fecha<%=contEsc%>"><%=rsEsc.getString("fecha")%></td>
+                                        <td id="esc_titulo<%=contEsc%>"><%=rsEsc.getString("titulo")%></td>
+                                        <td id="esc_noticia<%=contEsc%>"><%=rsEsc.getString("noticia")%></td>
+                                        <td id="esc_vigencia<%=contEsc%>"><%=rsEsc.getString("vigencia")%></td>
+                                        <%
+                                                out.println("</tr>");
+                                                contEsc++;
                                             }
                                         %>
                                     </tbody>
@@ -784,41 +715,36 @@ pageEncoding="ISO-8859-1"%>
                                         <th>Tipo</th>
                                         <th>Descripción</th>
                                     </tr>
-                                </thead>
+                                </thead>                                                                                          
                                     <tbody>
-                                        <%
-                                            try{
-                                                int contErr =0;
-                                                CallableStatement sp_Err = _connMy.prepareCall("{call sp_mae_errores(?,'100','','')}");
-                                                sp_Err.setString(1,var);
-                                                sp_Err.execute();
-                                                final ResultSet rsErr = sp_Err.getResultSet();
-                                                String claErr = "" ;
-                                                while(rsErr.next())
+                                        <%                                                            
+                                            int contErr =0;                                
+                                            CallableStatement sp_Err = _connMy.prepareCall("{call sp_mae_errores(?,'100','','')}");
+                                            sp_Err.setString(1,var);
+                                            sp_Err.execute();
+                                            final ResultSet rsErr = sp_Err.getResultSet();
+                                            String claErr = "" ;
+                                            while(rsErr.next())
+                                            {
+                                                if(contErr % 2 == 0)
                                                 {
-                                                    if(contErr % 2 == 0)
-                                                    {
-                                                        claErr = "alt";
-                                                    }else
-                                                    {  
-                                                        claErr = "";
-                                                    }
-                                                    out.println("<tr id='filaErr"+contErr+"' class='"+claErr+"'>");
-                                                    %> 
-                                                    <td>
-                                                        <a id="datoErr" href="javascript: onclick=habilitaModErr(<%=contErr%>)"> >></a>
-                                                        <input type="hidden" id="habilitaErr" value="0" />
-                                                    </td>
-                                                    <td id="err_id<%=contErr%>"><%=rsErr.getString("id")%></td>
-                                                    <td id="err_tipo<%=contErr%>"><%=rsErr.getString("tipo_error")%></td>
-                                                    <td id="err_descripcion<%=contErr%>"><%=rsErr.getString("descripcion")%></td>
-                                                    <%
-                                                    out.println("</tr>");
-                                                    contErr++;
+                                                    claErr = "alt";
+                                                }else
+                                                {  
+                                                    claErr = "";
                                                 }
-                                            }catch(Exception e){
-                                                e.printStackTrace();
-                                                System.out.println("error");
+                                                out.println("<tr id='filaErr"+contErr+"' class='"+claErr+"'>");
+                                        %> 
+                                        <td>
+                                            <a id="datoErr" href="javascript: onclick=habilitaModErr(<%=contErr%>)"> >></a>
+                                            <input type="hidden" id="habilitaErr" value="0" />
+                                        </td>
+                                        <td id="err_id<%=contErr%>"><%=rsErr.getString("id")%></td>
+                                        <td id="err_tipo<%=contErr%>"><%=rsErr.getString("tipo_error")%></td>
+                                        <td id="err_descripcion<%=contErr%>"><%=rsErr.getString("descripcion")%></td>
+                                        <%
+                                                out.println("</tr>");
+                                                contErr++;
                                             }
                                         %>
                                     </tbody>

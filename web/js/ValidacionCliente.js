@@ -1,5 +1,6 @@
 function FuncionValidaCliente(id){
-    var validarRut = new RegExp("[^0-9kK-]"); 
+     var validarRut = new RegExp("[^0-9kK-]"); 
+	
 
     var rutCli = $("#txt_cliente_rut").val();
     var posicion1 = rutCli.indexOf('-');
@@ -65,7 +66,7 @@ function FuncionValidaCliente(id){
         return false;
     }
     
-    if($("#txt_cliente_fono1").val() =="")
+         if($("#txt_cliente_fono1").val() =="")
     {
         FuncionErrores(8); 
         $("#txt_cliente_fono1").focus();
@@ -93,7 +94,7 @@ function FuncionValidaCliente(id){
         return false;
     }
         
-    if($("#txt_cliente_contacto").val() == "")
+    if($("txt_cliente_contacto").val() == "")
     {
         FuncionErrores(12); 
         $("#txt_cliente_contacto").focus();
@@ -108,21 +109,21 @@ function FuncionValidaCliente(id){
         return false;
     }
     
-    if($("#txt_cliente_ejecutivo").val() == "")
+    if($("txt_cliente_ejecutivo").val() == "")
     {
-        alert("Seleccione ejecutivo");
+        alert("Ingrese ejecutivo");
         $("#txt_cliente_ejecutivo").focus();
         return false;
     }
           
     if($("#txt_cliente_estado").val() == "")
     {
-        alert("Seleccione estado");
+	alert("Ingrese estado");
 	$("#txt_cliente_estado").focus();
         return false;
     }
             
-        Clientes(id);
+         Clientes(id);
     }
 
 

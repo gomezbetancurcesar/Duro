@@ -100,7 +100,7 @@ function Actividad()
                         </a>
                     </li>
                     <li class="submenu">
-                        <a class="link" href="#" onclick="return false;" target="FrGral">
+                        <a class="link" href="svm_Escritorio.jsp" onclick="CambioEsc(cambio)" target="FrGral">
                           Documentos
                         </a>
                         <div class="submenu-contenido">

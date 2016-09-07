@@ -82,6 +82,11 @@
          rutUser = (String)s.getAttribute("rut");
     }
     _connMy = conexionBD.Conectar((String)s.getAttribute("organizacion"));
+//    if(_connMy == null)
+//    {
+//        response.sendRedirect("login.jsp");
+//    }
+//    
     int id = Integer.parseInt(request.getParameter("par"));  
 %>
 
@@ -103,22 +108,22 @@
         final ResultSet rs = sp_usu.getResultSet();
         while(rs.next())            
         {
-            rutCli = rs.getString("rut");
-            nomCli = rs.getString("razon_social");
-            contacto = rs.getString("contacto");
-            direccion = rs.getString("direccion");
-            nomEje  = rs.getString("rut_eje");
-            estado = rs.getString("estado");
-
-            codigo=rs.getString("codigo");
-            sigla=rs.getString("sigla");
-            comuna=rs.getString("comuna");
-            ciudad=rs.getString("ciudad");
-            fono1=rs.getString("fono_uno");
-            fono2=rs.getString("fono_dos");
-            fax=rs.getString("fax");
-            rubro=rs.getString("rubro");
-            casilla=rs.getString("casilla");
+             rutCli = rs.getString("rut");
+             nomCli = rs.getString("razon_social");
+             contacto = rs.getString("contacto");
+             direccion = rs.getString("direccion");
+             nomEje  = rs.getString("rut_eje");
+             estado = rs.getString("estado");
+             
+             codigo=rs.getString("codigo");
+             sigla=rs.getString("sigla");
+             comuna=rs.getString("comuna");
+             ciudad=rs.getString("ciudad");
+             fono1=rs.getString("fono_uno");
+             fono2=rs.getString("fono_dos");
+             fax=rs.getString("fax");
+             rubro=rs.getString("rubro");
+             casilla=rs.getString("casilla");
         }
         
     %>
@@ -129,28 +134,9 @@
         $("#txt_cliente_nombre").val("<%=nomCli%>");
         $("#txt_cliente_contacto").val("<%=contacto%>");
         $("#txt_cliente_direccion").val("<%=direccion%>");
-        
-        <% 
-            if(nomEje != null || !nomEje.equals("null") || !nomEje.equals("")){
-                %>
-                $("#txt_cliente_ejecutivo").val("<%=nomEje%>");
-                <%
-            }else{
-                %>
-                $("#txt_cliente_ejecutivo").val("");
-                <%
-            }
+        $("#txt_cliente_ejecutivo").val("<%=nomEje%>");
+        $("#txt_cliente_estado").val("<%=estado%>");
 
-            if(estado != null || !estado.equals("null") || !estado.equals("")){
-                %>
-                $("#txt_cliente_estado").val("<%=estado%>");
-                <%
-            }else{
-                %>
-                $("#txt_cliente_estado").val("");
-                <%
-            }
-        %>
         $("#txt_cliente_codigo").val("<%=codigo%>");
         $("#txt_sigla_cliente").val("<%=sigla%>");
         $("#txt_cliente_comuna").val("<%=comuna%>");
@@ -188,23 +174,10 @@
                         <tr>
                             <td colspan = 2>FORMULARIO<hr/></td>	
                         </tr>
-                        <%
-                            if(id == 3 ||id == 2)
-                            {
-                                %>
-                                <tr>
-                                    <td>C&oacute;digo: </td>
-                                    <td>
-                                        <input readonly="readonly" maxlength="11" type="text" name="txt_cliente_codigo" id="txt_cliente_codigo" class="readonly" />
-                                    </td>
-                                </tr>
-                                <%
-                            }else{
-                                %>
-                                <input type="hidden" name="txt_cliente_codigo" id="txt_cliente_codigo" value="0"/>
-                                <%
-                            }
-                        %>
+                        <tr>
+                            <td>C&oacute;digo: </td>
+                            <td><input disabled="disabled" maxlength="11" type="text" name="txt_cliente_codigo" id="txt_cliente_codigo"  /></td>
+                        </tr>
                         <tr>
                             <td>Rut Cliente: </td>
                             <td><input  maxlength="11" type="text" name="txt_cliente_rut" id="txt_cliente_rut"  /></td>
