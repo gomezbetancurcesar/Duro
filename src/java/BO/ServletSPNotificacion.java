@@ -51,15 +51,18 @@ public class ServletSPNotificacion extends HttpServlet {
             String estado = request.getParameter("slt_not_est");
             String nom = request.getParameter("txt_not_usr");
             String email = request.getParameter("txt_not_email");
+            String id = request.getParameter("hid_not_id");
                  
         try{ 
             System.out.println("Variables" +estado +" "+nom +" "+email+" ");
             _connMy = conexionBD.Conectar((String)s.getAttribute("organizacion"));
-            CallableStatement sp_usu = _connMy.prepareCall("{call sp_mae_notificaciones(?,?,?,?)}");
+            CallableStatement sp_usu = _connMy.prepareCall("{call sp_mae_notificaciones(?,?,?,?,?)}");
             sp_usu.setString(1,opcion_Notificaciones);
+            sp_usu.setLong(2,Integer.parseInt(id));
             sp_usu.setString(2,estado);
             sp_usu.setString(3,nom);
             sp_usu.setString(4,email);
+            sp_usu.registerOutParameter("op", Types.VARCHAR);
             sp_usu.execute();
         }catch(Exception e){
             _connMy.rollback();

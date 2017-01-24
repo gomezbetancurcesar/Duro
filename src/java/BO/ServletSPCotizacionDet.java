@@ -59,14 +59,19 @@ public class ServletSPCotizacionDet extends HttpServlet {
             String largo=request.getParameter("txt_cotizacion_largo");
             String valorUniCrom=request.getParameter("txt_cotizacion_valUniCrom");
             String valorTotalCrom=request.getParameter("txt_cotizacion_totalCrom");
+            String valorUnitario=request.getParameter("txt_cotizacion_valUnitario").isEmpty()?"0":request.getParameter("txt_cotizacion_valUnitario");
+            String totales=request.getParameter("txt_cotizacion_totales").isEmpty()?"0":request.getParameter("txt_cotizacion_totales");
+            String costoHoras=request.getParameter("txt_cotizacion_cHora").isEmpty()?"0":request.getParameter("txt_cotizacion_cHora");
+            String cantHoras=request.getParameter("txt_cotizacion_cantHrs").isEmpty()?"0":request.getParameter("txt_cotizacion_cantHrs");
+            String totalHoras=String.valueOf(Integer.parseInt(costoHoras) * Integer.parseInt(cantHoras)); 
             String sequencia=request.getParameter("sequencia");
             String correlativo=request.getParameter("correlativo").isEmpty()?"0":request.getParameter("correlativo");
-            
+
             try{
                 _connMy = conexionBD.Conectar((String)s.getAttribute("organizacion")); 
                 CallableStatement sp_usu=null;
                            
-                sp_usu = _connMy.prepareCall("{call sp_cotizaciones_det(?,?,?,?,?,?,?,?,?,?,?,?)}");
+                sp_usu = _connMy.prepareCall("{call sp_cotizaciones_det(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
                 sp_usu.setString(1,opcion);
                 sp_usu.setInt(2,Integer.parseInt(numeroCotiza));
                 sp_usu.setInt(3,Integer.parseInt(correlativo));
@@ -76,9 +81,14 @@ public class ServletSPCotizacionDet extends HttpServlet {
                 sp_usu.setString(7,valorDM);
                 sp_usu.setDouble(8,Double.parseDouble(diametro));
                 sp_usu.setDouble(9,Double.parseDouble(largo));
-                sp_usu.setInt(10,Integer.parseInt(valorUniCrom));
-                sp_usu.setInt(11,Integer.parseInt(valorTotalCrom));
-                sp_usu.setInt(12,Integer.parseInt(sequencia));
+                sp_usu.setLong(10,Long.parseLong(valorUniCrom));
+                sp_usu.setLong(11,Long.parseLong(valorTotalCrom));
+                sp_usu.setLong(12,Long.parseLong(valorUnitario));
+                sp_usu.setLong(13,Long.parseLong(totales));
+                sp_usu.setLong(14,Long.parseLong(costoHoras));
+                sp_usu.setLong(15,Long.parseLong(cantHoras));
+                sp_usu.setLong(16,Long.parseLong(totalHoras));                
+                sp_usu.setInt(17,Integer.parseInt(sequencia));
                 sp_usu.registerOutParameter(1, Types.VARCHAR);
                 
                 sp_usu.execute();
@@ -93,7 +103,7 @@ public class ServletSPCotizacionDet extends HttpServlet {
                 String cla = "";
                 int cont = 0;
                 String salida = "";
-                if(opcion.equals("select")){
+                if (opcion.equals("select") || opcion.equals("select_paso")){
                     while(rs.next())
                     {
                         if(cont % 2 == 0)
@@ -105,7 +115,7 @@ public class ServletSPCotizacionDet extends HttpServlet {
                         }
                         salida += "<tr id='filaTablaDetalle"+cont+"' class='"+cla+"'>";
 
-                        salida += "<td><a id=\"seleccion"+cont+"\" href=\"javascript: onclick=ModificaDetalleComercial("+cont+")\"> >></a>\n" +
+                        salida += "<td><a id=\"seleccion"+cont+"\" href=\"javascript: onclick=ModificaDetalleComercial("+cont+");CargaCorrDet();\"> >></a>\n" +
                                     "<input type=\"hidden\" value=\"0\" id=\"habilitaDetCom\" name=\"habilitaDetCom\" />\n" +
                                     "</td> ";
                         salida += "<td id =\"cotazacionDet_correlativo"+cont+"\">"+rs.getString("correlativo")+"</td>";   
@@ -117,7 +127,13 @@ public class ServletSPCotizacionDet extends HttpServlet {
                         salida += "<td id =\"cotazacionDet_largo"+cont+"\">"+rs.getString("largo")+"</td>"; 
                         salida += "<td id =\"cotazacionDet_valUniCrom"+cont+"\">"+rs.getString("valor_uni_crom")+"</td>"; 
                         salida += "<td id =\"cotazacionDet_totalCrom"+cont+"\">"+rs.getString("total_cromado")+"</td>"; 
+                        salida += "<td id =\"cotazacionDet_cHora"+cont+"\">"+rs.getString("c_horas")+"</td>"; 
+                        salida += "<td id =\"cotazacionDet_cantHoras"+cont+"\">"+rs.getString("cant_horas")+"</td>"; 
+                        salida += "<td id =\"cotazacionDet_totalHoras"+cont+"\">"+rs.getString("totalhoras_pesos")+"</td>";                         
+                        salida += "<td id =\"cotazacionDet_valUnitario"+cont+"\">"+rs.getString("valor_unitario")+"</td>"; 
+                        salida += "<td id =\"cotazacionDet_totales"+cont+"\">"+rs.getString("totales")+"</td>"; 
                         salida += "</tr>";
+                        salida += "<input type=\"hidden\" id=\"cantidad_detalle\" value="+(cont+1)+"></input>";
                         cont++;
                     }
                     out.println(salida);

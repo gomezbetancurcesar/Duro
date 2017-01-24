@@ -43,7 +43,7 @@ function Clientes(id){
     var mod = "";
     if (id === 1)
     {	
-        mod = "ingreso";
+        mod = "insert";
     } if(id==3){
         mod="Consultar";
         var boton=$("#btn_Cliente_Ingresar");
@@ -62,7 +62,7 @@ function Clientes(id){
             
     }if(id === 2)
     {
-        mod= "modifica";
+        mod= "update";
     }
 	//var rut = "";
         //rut = $("#txt_cliente_rut").val();

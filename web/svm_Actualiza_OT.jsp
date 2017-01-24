@@ -18,39 +18,30 @@
         <!--Codigo Sistemas SA-->
         <link href="css/calendario.css" type="text/css" rel="stylesheet" /> 
 
-        <link type="text/css" rel="stylesheet" media="screen" href="css/jquery.ui.all.css"/>
-        <link type="text/css" rel="stylesheet" media="screen" href="css/bootstrap.min.css"/>
+        <!--<link type="text/css" rel="stylesheet" media="screen" href="css/jquery.ui.all.css"/>-->
         <link type="text/css" rel="stylesheet" media="screen" href="css/bootstrap-theme.min.css"/>
         <link type="text/css" rel="stylesheet" media="screen" href="css/jquery-ui.css"/>
+        <link type="text/css" rel="stylesheet" href="css/bootstrap-3.3.5.min.css"/>
+        
 
         <script src="js/jquery.min.js" type="text/javascript"></script>
-        <script src="js/bootstrap.min.js" type="text/javascript"></script>
         <script src="js/jquery-ui.js" type="text/javascript"></script>
 
         <script src="js/calendar.js" type="text/javascript"></script>
         <script src="js/calendar-es.js" type="text/javascript"></script>
         <script src="js/calendar-setup.js" type="text/javascript"></script>
         <script src="js/Funcion_Errores.js" type="text/javascript"></script>
+        <script src="js/validaciones.js" type="text/javascript"></script>        
         <!-- Librerias Jquery -->
+        <script type="text/javascript" src="js/bootstrap-3.3.5.min.js"></script>
+        <script type="text/javascript" src="js/jquery.validate-1.14.0.min.js"></script>
+        <script type="text/javascript" src="js/jquery-validate.bootstrap-tooltip.js"></script>        
         <script src="js/jquery.validate.js" type="text/javascript"></script>
         <script src="js/jquery.validate.min.js" type="text/javascript"></script>
-        <script src="js/jquery.validate.js" type="text/javascript"></script>
         <script src="js/messages_es.js" type="text/javascript" ></script>
         <script src="js/CargarCombo.js" type="text/javascript" ></script>
         <script src="js/CRUD_OrdenTaller.js" type="text/javascript"></script>
         <script src="js/CRUD_ordentaller_det.js" type="text/javascript"></script>
-        <!--<script src="js/CargaPlanes.js" type="text/javascript" ></script>
-        
-        <script src="js/jquery-2.1.3.js" type="text/javascript"></script>
-        <script src="js/jquery-1.4.2.min.js" type="text/javascript"></script>
-        <script src ="js/jquery-1.10.2.js" type="text/javascript "></script>
-        <script src="js/jquery.min.js" type="text/javascript"></script>
-        
-        <script src="js/CRUD_ActividadComercial.js" type="text/javascript"></script>
-        <script src="js/validaciones.js" type="text/javascript"></script>
-        <script src="js/ValidacionActividadComercial.js" type="text/javascript"></script>
-        <script src="js/CRUD_DetalleActComer.js" type="text/javascript" ></script>
-        <script src="js/CRUD_Distribucion.js" type="text/javascript" ></script>-->
         <%
             //TipoUser, Rut y Nombre Ejecutivo PAra actualiza Actividad comercial.    
             HttpSession s = request.getSession();
@@ -76,7 +67,7 @@
             String cantMovil = "";
             String codCli = "";
             String tipCli = "";
-            String corrCotiza = "0";
+            String corrOT = "0";
             String codEje = "";
             String crm = "";
             String comentario = "";
@@ -85,7 +76,7 @@
             String cantMovilSP = "";
             String negocio = "";
 
-            corrCotiza = request.getParameter("secuencia") != null ? request.getParameter("secuencia") : "0";
+            corrOT = request.getParameter("secuencia") != null ? request.getParameter("secuencia") : "0";
 
             try {
                 _connMy = conexionBD.Conectar((String) s.getAttribute("organizacion"));
@@ -111,22 +102,12 @@
         <script type="text/javascript">
 
             $(document).ready(function () {
-                cargaMoneda();
-                cargaCotEspecial();
-                cargaPresupuesto();
-                cargaCondicion();
-                cargaPLazoEntrega();
-                //cargaCotizacion();
-                $("#txt_cotizacion_cantidad").keyup(function () {
-                    calculaTotal();
-                });
-                $("#txt_cotizacion_valUniCrom").keyup(function () {
-                    calculaTotal();
-                });
+                cargaCotEspecial();                
+                cargaOrdenTaller();                
             });
 
             function goBack() {
-                location.href = 'svm_Seleccion_Cotizacion.jsp';
+                location.href = 'svm_Seleccion_OT.jsp';
             }
 
             function getUrlParameter(sParam) {
@@ -142,43 +123,56 @@
                         return sParameterName[1] === undefined ? true : sParameterName[1];
                     }
                 }
-            }
-            ;
+            };
+            
+            function loadDialogPiezas(){
+    $( "#dialog_pieza" ).dialog({
+        modal: true,
+        width: 600,
+        height:400,
+        resizable: false,
+        buttons: {
+            Seleccionar: 
+                function() {
+                $("#select_ordentaller_pieza").val($("#select_cotizacion_pieza_filter").val());
+                $( this ).dialog( "close" );
+                cargaValorDetalle();
+                calculaTotal();
+            },
+            Cancelar: function() {
+                $( this ).dialog("close");
+            }            
+        },
+        open: function(event, ui) {
+            $("#txt_cotizacion_filtro_pieza").val("");
+            $(".ui-dialog-titlebar-close", ui.dialog | ui).hide();
+            filtraPiezas();
+        }
+    });
+}
 
-            function loadDialogPiezas() {
-                $("#dialog_pieza").dialog({
-                    modal: true,
-                    width: 600,
-                    height: 400,
-                    buttons: {
-                        Cancelar: function () {
-                            $(this).dialog("close");
-                        },
-                        Seleccionar: function () {
-                            $("#select_cotizacion_pieza").val($("#select_cotizacion_pieza_filter").val());
-                            $(this).dialog("close");
-                            cargaValorDetalle();
-                            calculaTotal();
-                        }
-                    }
-                });
-            }
-
-            function loadDialogClientes() {
+    function loadDialogClientes() {
                 $("#dialog_clientes").dialog({
                     modal: true,
                     width: 600,
                     height: 420,
+                    resizable: false,                    
                     buttons: {
-                        Cancelar: function () {
+                        Seleccionar: function () {
+                            $("#txt_rutcli").val($("#select_cliente_filter").val());
+                            var text = $("#select_cliente_filter option:selected").text();
+                            $("#txt_cliente").val(text.substring(21, text.length));
                             $(this).dialog("close");
                         },
-                        Seleccionar: function () {
-                            $("#txt_cotizacion_rutcli").val($("#select_cliente_filter").val());
-                            var text = $("#select_cliente_filter option:selected").text();
-                            $("#txt_cotizacion_cli").val(text.substring(21, text.length));
+                        Cancelar: function () {
                             $(this).dialog("close");
                         }
+                    },
+                    open: function(event, ui) {
+                        $("#txt_filtro_cliente_rut").val("");
+                        $("#txt_filtro_cliente_nombre").val("");
+                        $(".ui-dialog-titlebar-close", ui.dialog | ui).hide();
+                        filtraClientes();
                     }
                 });
             }
@@ -187,10 +181,6 @@
     </head>
     <body id="principal">
         <input type="hidden" value="<%=id%>" id="parametroActComercial" />
-        <input type="hidden" value="<%=servMovil%>" id="tipServicio" />
-        <input type="hidden" value="<%=tipoUser%>" id="tipoUser" />
-        <input type="hidden" value="<%=rut%>" id="rutUsuario" />
-        <input type="hidden" value="<%=tipServi%>" id="tipoServicioMovil" />
         <div class="formularioIngresar">
             <table id="header">                           
                 <tr>
@@ -207,79 +197,81 @@
                                         <input type="text" disabled= "disabled" id="txt_orden_numero" maxlength="11" name="txt_orden_numero" />
                                     </td>                           
                                     <td>N° Factura:</td>
-                                    <td><input type="text" disabled= "disabled" id="txt_factura_numero" maxlength="11" name="txt_factura_numero" />
-                                        <td>RUT:</td>
-                                        <td>
-                                            <input type="text" disabled= "disabled" id="txt_rutcli" maxlength="11" name="txt_rutcli" />
-                                        </td>
-                                        <td>&nbsp;</td> <td>&nbsp;</td>
-                                        <td>&nbsp;</td> <td>&nbsp;</td>
-                                        <td>&nbsp;</td> <td>&nbsp;</td>
-                                        <td>&nbsp;</td> <td>&nbsp;</td>
-                                        <td>&nbsp;</td> <td>&nbsp;</td>
-                                        <td>&nbsp;</td> <td>&nbsp;</td>
-                                        <td>&nbsp;</td> <td>&nbsp;</td>
-                                        <td>&nbsp;</td> <td>&nbsp;</td>
-                                        <td>&nbsp;</td> <td>&nbsp;</td>
-                                        <td>&nbsp;</td> <td>&nbsp;</td>
-                                        <td>&nbsp;</td> <td>&nbsp;</td>
-                                        <td>&nbsp;</td> <td>&nbsp;</td>
-                                        <td>&nbsp;</td> <td>&nbsp;</td>
-                                        <td>&nbsp;</td> <td>&nbsp;</td>                            
-                                        <td>&nbsp;</td> <td>&nbsp;</td>  
-                                        <td>&nbsp;</td> <td>&nbsp;</td>  
-                                        <td>&nbsp;</td> <td>&nbsp;</td>  
-                                        <td>&nbsp;</td> <td>&nbsp;</td>  
-                                        <td>&nbsp;</td> <td>&nbsp;</td>  
-                                        <td rowspan="6" >
-                                            <div id="alineacionEstados" >
-                                                <div class="etiqueta" >
-                                                    <center><label><b>Historial de Estados</b></label></center>
-                                                </div>
-                                                <div class="grillaConf">
-                                                    <table>
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Estado Anterior</th>
-                                                                <th>Estado Siguiente</th>
-                                                                <th>Fecha</th>                                    
-                                                                <th>Rut Usuario</th>                                    
-                                                                <th>Nombre Usuario</th>
-                                                            </tr>
-                                                        </thead>				
-                                                        <tbody>
-                                                            <%
-                                                                int cont = 0;
-                                                                var = "select";
-                                                                sp_usu = _connMy.prepareCall("{call sp_historial(?,?,'','')}");
-                                                                sp_usu.setString(1, var);
-                                                                sp_usu.setLong(2, Long.parseLong(secuencia));
-                                                                sp_usu.execute();
-                                                                final ResultSet rsHistorial = sp_usu.getResultSet();
-                                                                String claseGrilla = "";
-                                                                while (rsHistorial.next()) {
-                                                                    if (cont % 2 == 0) {
-                                                                        claseGrilla = "alt";
-                                                                    }
-                                                                    out.println("<tr id='filaTablaHistorial" + cont + "' class='" + claseGrilla + "'>");
-                                                            %>                                                                                                                                                                    
-                                                            <td id ="historial_estAnterior<%=cont%>"><%=rsHistorial.getString("estado_anterior")%></td>
-                                                            <td id ="historial_estSiguiente<%=cont%>"><%=rsHistorial.getString("estado_siguiente")%></td>
-                                                            <td id ="historial_fecha<%=cont%>"><%=rsHistorial.getString("fecha")%></td>
-                                                            <td id ="historial_rutUser<%=cont%>"><%=rsHistorial.getString("rutUser")%></td>
-                                                            <td id ="historial_nomUser<%=cont%>"><%=rsHistorial.getString("nomUser")%></td>                                                                                   
-                                                            <%
-                                                                    out.print("</tr>");
-                                                                    claseGrilla = "";
-                                                                    cont++;
-                                                                }
-                                                            %>                               
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+                                    <td><input type="text" disabled= "disabled" id="txt_factura_numero" maxlength="11" name="txt_factura_numero" /></td>
+                                    <td>RUT:</td>
+                                    <td><input type="text" readonly id="txt_rutcli" maxlength="11" name="txt_rutcli" />
+                                    <input class = "botonera" style="width: 70px" type="button" name="btnClientes" id="btnClientes" value="Clientes" onClick="loadDialogClientes()" /></td>
+                                    <td></td>
+                                    <td>
+                                
+                                    </td>
+                                    <td>&nbsp;</td> <td>&nbsp;</td>
+                                    <td>&nbsp;</td> <td>&nbsp;</td>
+                                    <td>&nbsp;</td> <td>&nbsp;</td>
+                                    <td>&nbsp;</td> <td>&nbsp;</td>
+                                    <td>&nbsp;</td> <td>&nbsp;</td>
+                                    <td>&nbsp;</td> <td>&nbsp;</td>
+                                    <td>&nbsp;</td> <td>&nbsp;</td>
+                                    <td>&nbsp;</td> <td>&nbsp;</td>
+                                    <td>&nbsp;</td> <td>&nbsp;</td>
+                                    <td>&nbsp;</td> <td>&nbsp;</td>
+                                    <td>&nbsp;</td> <td>&nbsp;</td>
+                                    <td>&nbsp;</td> <td>&nbsp;</td>
+                                    <td>&nbsp;</td> <td>&nbsp;</td>
+                                    <td>&nbsp;</td> <td>&nbsp;</td>                            
+                                    <td>&nbsp;</td> <td>&nbsp;</td>  
+                                    <td>&nbsp;</td> <td>&nbsp;</td>  
+                                    <td>&nbsp;</td> <td>&nbsp;</td>  
+                                    <td>&nbsp;</td> <td>&nbsp;</td>  
+                                    <td>&nbsp;</td> <td>&nbsp;</td>  
+                                    <td rowspan="6" >
+                                        <div id="alineacionEstados" >
+                                            <div class="etiqueta" >
+                                                <center><label><b>Historial de Estados</b></label></center>
                                             </div>
-                                        </td>
-
+                                            <div class="grillaConf">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Estado Anterior</th>
+                                                            <th>Estado Siguiente</th>
+                                                            <th>Fecha</th>                                    
+                                                            <th>Rut Usuario</th>                                    
+                                                            <th>Nombre Usuario</th>
+                                                        </tr>
+                                                    </thead>				
+                                                    <tbody>
+                                                        <%
+                                                            int cont = 0;
+                                                            var = "select";
+                                                            sp_usu = _connMy.prepareCall("{call sp_historial(?,?,'','')}");
+                                                            sp_usu.setString(1, var);
+                                                            sp_usu.setLong(2, Long.parseLong(secuencia));
+                                                            sp_usu.execute();
+                                                            final ResultSet rsHistorial = sp_usu.getResultSet();
+                                                            String claseGrilla = "";
+                                                            while (rsHistorial.next()) {
+                                                                if (cont % 2 == 0) {
+                                                                    claseGrilla = "alt";
+                                                                }
+                                                                out.println("<tr id='filaTablaHistorial" + cont + "' class='" + claseGrilla + "'>");
+                                                        %>                                                                                                                                                                    
+                                                        <td id ="historial_estAnterior<%=cont%>"><%=rsHistorial.getString("estado_anterior")%></td>
+                                                        <td id ="historial_estSiguiente<%=cont%>"><%=rsHistorial.getString("estado_siguiente")%></td>
+                                                        <td id ="historial_fecha<%=cont%>"><%=rsHistorial.getString("fecha")%></td>
+                                                        <td id ="historial_rutUser<%=cont%>"><%=rsHistorial.getString("rutUser")%></td>
+                                                        <td id ="historial_nomUser<%=cont%>"><%=rsHistorial.getString("nomUser")%></td>                                                                                   
+                                                        <%
+                                                                out.print("</tr>");
+                                                                claseGrilla = "";
+                                                                cont++;
+                                                            }
+                                                        %>                               
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Fecha emisi&oacute;n:</td>
@@ -290,81 +282,73 @@
                                         <script type="text/javascript">
                                             Calendar.setup({
                                                 inputField: "txt_orden_fecha", // id del campo de texto 
-                                                ifFormat: "%Y-%m-%d", // formato de la fecha que se escriba en el campo de texto 
+                                                ifFormat: "%d-%m-%Y", // formato de la fecha que se escriba en el campo de texto 
                                                 button: "lanzador"     // el id del boton que lanzará el calendario 
                                             });
                                         </script>	
                                     </td>                          
                                     <td>N° Gu&iacute;a Despacho:</td>
-                                    <td>
-                                        <input type="text" disabled= "disabled" id="txt_guia_despacho" maxlength="11" name="txt_guia_despacho" />
-                                    </td>
+                                    <td><input type="text" disabled= "disabled" id="txt_guia_despacho" maxlength="11" name="txt_guia_despacho" /></td>
                                     <td>Cliente:</td>
-                                    <td>
-                                        <input type="text" disabled= "disabled" id="txt_cliente" maxlength="11" name="txt_cliente" />
+                                    <td rowspan="3">
+                                        <textarea rows="3" cols="27" readonly id="txt_cliente" maxlength="40">
+                                        </textarea> 
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Fecha Despacho:</td>
                                     <td>
-                                        <input type = "text" name = "txt_orden_fecha_desp" readonly id= "txt_orden_fecha_desp" size="12" />
-                                        <img src="images/calendario.png" width="16" height="16" border="0" title="Fecha Despacho" id="lanzador2"/>
+                                        <input type = "text" disabled= "disabled" name = "txt_orden_fecha_desp" readonly id= "txt_orden_fecha_desp" size="12" />
+                                        <!-- <img src="images/calendario.png" width="16" height="16" border="0" title="Fecha Despacho" id="lanzador2"/> -->
                                         <!-- script que define y configura el calendario--> 
                                         <script type="text/javascript">
                                             Calendar.setup({
                                                 inputField: "txt_orden_fecha_desp", // id del campo de texto 
-                                                ifFormat: "%Y-%m-%d", // formato de la fecha que se escriba en el campo de texto 
+                                                ifFormat: "%d-%m-%Y", // formato de la fecha que se escriba en el campo de texto 
                                                 button: "lanzador2"     // el id del boton que lanzará el calendario 
                                             });
                                         </script>
                                     </td>
-                                    <!--<td><input type="text" id="txt_cotizacion_atencion" maxlength="11" name="txt_cotizacion_atencion" /></td>-->
                                     <td>Especial:</td>
                                     <td><select name="select_especial" id="select_especial">
                                             <option value="-1">--Seleccione--</option>
-                                            <option value="0">NO</option>
-                                            <option value="1">SI</option>
+                                            <option value="NO">NO</option>
+                                            <option value="SI">SI</option>
                                         </select> 
                                     </td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
-
                                 </tr>
                                 <tr>
                                     <td>Fecha T&eacute;rmino:</td>
                                     <td>
-                                        <input type = "text" name = "txt_orden_fecha_term" readonly id= "txt_orden_fecha_term" size="12" />
-                                        <img src="images/calendario.png" width="16" height="16" border="0" title="Fecha Despacho" id="lanzador3"/>
+                                        <input type = "text" disabled= "disabled" name = "txt_orden_fecha_term" readonly id= "txt_orden_fecha_term" size="12" />
+                                        <!-- <img src="images/calendario.png" width="16" height="16" border="0" title="Fecha Despacho" id="lanzador3"/> -->
                                         <!-- script que define y configura el calendario--> 
                                         <script type="text/javascript">
                                             Calendar.setup({
                                                 inputField: "txt_orden_fecha_term", // id del campo de texto 
-                                                ifFormat: "%Y-%m-%d", // formato de la fecha que se escriba en el campo de texto 
+                                                ifFormat: "%d-%m-%Y", // formato de la fecha que se escriba en el campo de texto 
                                                 button: "lanzador3"     // el id del boton que lanzará el calendario 
                                             });
                                         </script>
                                     </td>
-
                                     <td>Acepta con:</td>                            
-                                    <td><input type="text" id="txt_acepta_con" maxlength="11" name="txt_acepta_con" /></td>
+                                    <td><input type="text" id="txt_acepta_con" maxlength="45" name="txt_acepta_con" /></td>
                                 </tr>
                                 <tr>
                                     <td>N° Cotizaci&oacute;n:</td>
-                                    <td><input type="text" disabled= "disabled" id="txt_cotizacion_numero" maxlength="11" name="txt_cotizacion_numero" />
-                                    </td>
-                                    </td>
+                                    <td><input type="text" id="txt_cotizacion_numero" maxlength="9" name="txt_cotizacion_numero" onkeypress="return validarSiNumero(event)"/></td>
                                 </tr>
                                 <tr>
                                     <td>Detalle:</td>
-                                    <td> <textarea rows="3" cols="27" disabled= "disabled" id="txt_detalle"></textarea>  </td>
+                                    <td> <textarea rows="3" cols="27" maxlength="255" id="txt_detalle"></textarea>  </td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td>
-
-                                    </td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 </tr>
@@ -391,49 +375,93 @@
                                     <td>&nbsp;</td>
                                 </tr>
                                 <tr>
-                                    <td>Rectificado en:</td>
-                                    <td><input type="text" id="txt_rectificado_en" name="txt_rectificado_en" /></td>
-                                    <td>Cromado en:</td>
-                                    <td><input type="text" id="txt_cromado_en" name="txt_cromado_en" /></td>
-                                    <td>Rectificado en:</td>
-                                    <td><input type="text" id="txt_rectificado_en_final" name="txt_rectificado_en_final" /></td>
+                                    <td>Rectificado pr&eacute;vio:</td>
+                                    <td><select name="select_rectificado_previo" id="select_rectificado_previo">
+                                            <option value="-1">--Seleccione--</option>
+                                            <option value="NO">NO</option>
+                                            <option value="SI">SI</option>
+                                    </select> </td>
+                                    <td>Cromado:</td>
+                                    <td><select name="select_cromado" id="select_cromado">
+                                            <option value="-1">--Seleccione--</option>
+                                            <option value="NO">NO</option>
+                                            <option value="SI">SI</option>
+                                    </select> </td>
+                                    <td>Rectificado final:</td>
+                                    <td><select name="select_rectificado_final" id="select_rectificado_final">
+                                            <option value="-1">--Seleccione--</option>
+                                            <option value="NO">NO</option>
+                                            <option value="SI">SI</option>
+                                    </select> </td>                                    
                                     <td rowspan="3">Observaciones:</td>
-                                    <td rowspan="3"><textarea rows="3" cols="27" id="txt_observaciones"></textarea></td>
+                                    <td rowspan="3"><textarea rows="2" cols="27" maxlength="60" id="txt_observaciones"></textarea></td>
                                 </tr>
                                 <tr>
                                     <td>Medida Obtenida:</td>
-                                    <td><input type="text" id="txt_medida_obtenida" name="txt_medida_obtenida" /></td>
+                                    <td><input type="text" id="txt_medida_obtenida_rectprevio" maxlength="6" name="txt_medida_rect_previo" onkeypress="return validarSiDecimal(event)"/></td>
+                                    <td>Espesor pedido:</td>
+                                    <td><input type="text" id="txt_espesor_pedido" maxlength="6" name="txt_espesor_pedido" onkeypress="return validarSiDecimal(event)"/></td>
+                                    <td>Medida Obtenida:</td>
+                                    <td><input type="text" id="txt_medida_obtenida_rectfinal" maxlength="6" name="txt_medida_rect_final" onkeypress="return validarSiDecimal(event)"/></td>                                    
+                                </tr>
+                                <tr>
+                                    <td>Rectificado en:</td>
+                                    <td><input type="text" id="txt_rectificadoprevio_en" maxlength="20" name="txt_rectificadoprevio_en" /></td>
+                                    <td>Cromado en:</td>
+                                    <td><input type="text" id="txt_cromado_en" maxlength="20" name="txt_cromado_en"/></td>
+                                    <td>Rectificado en:</td>
+                                    <td><input type="text" id="txt_rectificadofinal_en" maxlength="20" name="txt_rectificadofinal_en" /></td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Torno:</td>
+                                    <td><select id="select_torno_rect_previo" name="select_torno_rect_previo" >
+                                        <option value="-1">--Seleccione--</option>
+                                        <option value="NO">NO</option>
+                                        <option value="SI">SI</option>
+                                        </select>
+                                    </td>
                                     <td>Superficie:</td>
-                                    <td><input type="text" id="txt_superficie" name="txt_superficie" /></td>
-                                    <td>Medida Obtenida:</td>
-                                    <td><input type="text" id="txt_medida_obtenida_final" name="txt_medida_obtenida_final" /></td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr>
+                                    <td><input type="text" id="txt_superficie" maxlength="6" name="txt_superficie" onkeypress="return validarSiDecimal(event)"/></td>
                                     <td>Torno:</td>
-                                    <td><input type="text" id="txt_torno" name="txt_torno" /></td>
+                                    <td><select id="select_torno_rect_final" name="select_torno_rect_final" >
+                                        <option value="-1">--Seleccione--</option>
+                                        <option value="NO">NO</option>
+                                        <option value="SI">SI</option>
+                                        </select>                                            
+                                    </td>
+                                    <td rowspan="3">Inspecci&oacute;n final:</td>
+                                    <td rowspan="3"><textarea rows="3" cols="27" maxlength="60" id="txt_inspeccion_final"></textarea></td>                                    
+                                    <td>&nbsp;</td>                                     
+                                </tr>                            
+                                <tr>
+                                    <td>Por:</td>
+                                    <td><input type="text" id="txt_tornopor_previo" maxlength="19" name="txt_tornopor_previo" /></td>
                                     <td>Corriente:</td>
-                                    <td><input type="text" id="txt_corriente" name="txt_corriente" /></td>
-                                    <td>Torno:</td>
-                                    <td><input type="text" id="txt_torno_final" name="txt_torno_final" /></td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>                            
-                                </tr>
+                                    <td><input type="text" id="txt_corriente" maxlength="6" name="txt_corriente" onkeypress="return validarSiDecimal(event)"/></td>
+                                    <td>Por:</td>
+                                    <td><input type="text" id="txt_tornopor_final" maxlength="19" name="txt_tornopor_final" /></td>                                                               
+                                </tr>                           
                                 <tr>
-                                    <td>Por:</td>
-                                    <td><input type="text" id="txt_por" name="txt_por" /></td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
                                     <td>Tiempo:</td>
-                                    <td><input type="text" id="txt_tiempo" name="txt_tiempo" /></td>
-                                    <td>Por:</td>
-                                    <td><input type="text" id="txt_por_final" name="txt_por_final" /></td>                           
+                                    <td><input type="text" id="txt_tiempo" maxlength="20" name="txt_tiempo" /></td>
                                 </tr>
                                 <tr>
                                     <td>&nbsp;</td>
                                     <td>&nbsp;</td>
                                     <td>Otro baño o tratamiento:</td>
-                                    <td><input type="text" id="txt_otro_tratamiento" name="txt_otro_tratamiento" /></td>
-                                </tr>                           
+                                    <td><input type="text" id="txt_otro_tratamiento" maxlength="40" name="txt_otro_tratamiento" /></td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>                                    
+                                    <td>Tratamiento Final T&eacute;rmico:</td>
+                                    <td><input type="text" id="txt_tratamientofinaltermico" maxlength="40" name="txt_tratamientofinaltermico" /></td>                                    
+                                </tr>    
+                            </table>
+                            <table>                        
                                 <tr>
                                     <td colspan ="8" ><hr style="margin-bottom: 4px;margin-top: 4px;" /></td>
                                 </tr>       
@@ -442,398 +470,184 @@
                                 </tr>       
                                 <tr>
                                     <td>Metal Base:</td>
-                                    <td><select name="select_metal_base" id="select_metal_base">
-                                            <option value="">--Seleccione--</option>
-                                        </select> 
-                                    </td>
+                                    <td><input type="text" id="txt_metalbase_considerar" maxlength="4" name="txt_metalbase_considerar" /></td>
                                     <td>Cromados Anteriores:</td>
-                                    <td><input type="text" id="txt_cromados_anteriores" name="txt_cromados_anteriores" /></td>
+                                    <td><input type="text" id="txt_cromados_anteriores" maxlength="30" name="txt_cromados_anteriores" /></td>
                                     <td>Temperatura:</td>
-                                    <td><input type="text" id="txt_temperatura" name="txt_temperatura" /></td>
+                                    <td><input type="text" id="txt_temperatura" maxlength="20" name="txt_temperatura" /></td>
                                 </tr>
                                 <tr>
                                     <td>Tratamiento T&eacute;rmico:</td>
                                     <td><select name="select_tratamiento_termico" id="select_tratamiento_termico">
-                                            <option value="">--Seleccione--</option>
+                                            <option value="-1">--Seleccione--</option>
+                                            <option value="NO">SI</option>
+                                            <option value="SI">NO</option>
                                         </select> 
                                     </td>
                                     <td>Presi&oacute;n:</td>
-                                    <td><input type="text" id="txt_presion" name="txt_presion" /></td>
+                                    <td><input type="text" id="txt_presion" maxlength="20" name="txt_presion" /></td>
                                     <td>Suspensi&oacute;n de la Pieza:</td>
-                                    <td><input type="text" id="txt_suspension" name="txt_suspension" /></td>
+                                    <td><input type="text" id="txt_suspension" maxlength="20" name="txt_suspension" /></td>
                                 </tr>
                                 <tr>
-                                    <td>Superficie:</td>
-                                    <td><select name="select_superficie" id="select_superficie">
-                                            <option value="">--Seleccione--</option>
+                                    <td>Superficie Dureza:</td>
+                                    <td><select name="select_superficiedureza" id="select_superficiedureza">
+                                            <option value="-1">--Seleccione--</option>
+                                            <%
+                                                Statement stmt = null;
+                                                ResultSet rsQuery = null;                                       
+                                                String q = "";
+                                                
+                                                stmt = _connMy.createStatement();
+                                                q="select descripcion from svm_mae_tablas where tablas = 'Superficie Dureza'";
+                                                rsQuery = stmt.executeQuery(q);
+                                                while(rsQuery.next())
+                                                {
+                                                    out.println("<option value='"+rsQuery.getString("descripcion")+"'>"+rsQuery.getString("descripcion")+"</option>");
+                                                }
+                                            %>                                            
                                         </select> 
                                     </td>
                                     <td>Medio:</td>
-                                    <td><input type="text" id="txt_medio" name="txt_medio" /></td>
+                                    <td><input type="text" id="txt_medio" maxlength="20" name="txt_medio" /></td>
                                     <td>Conexi&oacute;n El&eacute;ctrica:</td>
-                                    <td><input type="text" id="txt_conexion_electrica" name="txt_conexion_electrica" /></td>
+                                    <td><input type="text" id="txt_conexion_electrica" maxlength="40" name="txt_conexion_electrica" /></td>
                                 </tr>
                                 <tr>
-                                    <td>Estado:</td>
-                                    <td><select name="select_estado" id="select_estado">
-                                            <option value="">--Seleccione--</option>
+                                    <td>Superficie Estado:</td>
+                                    <td><select name="select_superficieestado" id="select_superficieestado">
+                                            <option value="-1">--Seleccione--</option>
+                                            <%
+                                                stmt = _connMy.createStatement();
+                                                q="select descripcion from svm_mae_tablas where tablas = 'Superficie Estado'";
+                                                rsQuery = stmt.executeQuery(q);
+                                                while(rsQuery.next())
+                                                {
+                                                    out.println("<option value='"+rsQuery.getString("descripcion")+"'>"+rsQuery.getString("descripcion")+"</option>");
+                                                }
+                                            %>                                             
                                         </select> 
                                     </td>
                                     <td>Desgaste:</td>
-                                    <td><input type="text" id="txt_desgaste" name="txt_desgaste" /></td>
-                                    <td>Rectificado pr&eacute;vio:</td>
-                                    <td><select name="select_rectificado_previo" id="select_rectificado_previo">
+                                    <td><input type="text" id="txt_desgaste" maxlength="20" name="txt_desgaste" /></td>
+                                </tr>                                              
+                                <tr>
+                                    <td>Superficie Soldadura:</td>
+                                    <td><select name="select_superficiesoldadura" id="select_superficiesoldadura">
                                             <option value="-1">--Seleccione--</option>
-                                                                                        <option value="0">NO</option>
-                                            <option value="1">SI</option>
-
-                                        </select> </td>
-                                </tr>                        
+                                            <%
+                                                stmt = _connMy.createStatement();
+                                                q="select descripcion from svm_mae_tablas where tablas = 'Superficie Soldadura'";
+                                                rsQuery = stmt.executeQuery(q);
+                                                while(rsQuery.next())
+                                                {
+                                                    out.println("<option value='"+rsQuery.getString("descripcion")+"'>"+rsQuery.getString("descripcion")+"</option>");
+                                                }
+                                            %>                                                
+                                        </select> 
+                                    </td>
                                 </tr>
                                 <tr>
+                                    <td colspan = "8"><hr style="margin-bottom: 4px;margin-top: 4px;"/></td>
+                                </tr>
+                                <tr>
+                                    <td colspan = "8">PIEZA<hr style="margin-bottom: 4px;margin-top: 4px;"/></td>
+                                </tr>                    
+                                <tr>
+                                    <td>Pieza:</td>
+                                    <td>
+                                        <select style="width:120px" id="select_ordentaller_pieza" name="select_ordentaller_pieza">
+                                        <option value="">--Seleccione--</option>
+                                            <%
+                                                stmt = _connMy.createStatement();
+                                                q="select codigo, nombre from svm_mae_pieza";
+                                                rsQuery = stmt.executeQuery(q);
+                                                while(rsQuery.next())
+                                                {
+                                                    out.println("<option value='"+rsQuery.getString("codigo")+"'>"+rsQuery.getString("nombre")+"</option>");
+                                                }
+                                            %>
+                                            </select> 
+                                            <input class = "botonera" type="button" name="btnPiezas" id="btnPiezas" value="Piezas" onClick="loadDialogPiezas()" /></td>
+                                           
+                                    <td>Cantidad:</td>
+                                    <td><input type="text" maxlength="9" id="txt_cotizacion_cantidad" name="txt_cotizacion_cantidad" /></td>         
+                                    <td>Estado:</td>
+                                    <td><select name="select_estado_piezas" id="select_estado_piezas">
+                                        <option value="-1">--Seleccione--</option>
+                                            <%
+                                                stmt = _connMy.createStatement();
+                                                q="select descripcion from svm_mae_tablas where tablas = 'Estado Pieza'";
+                                                rsQuery = stmt.executeQuery(q);
+                                                while(rsQuery.next())
+                                                {
+                                                    out.println("<option value='"+rsQuery.getString("descripcion")+"'>"+rsQuery.getString("descripcion")+"</option>");
+                                                }
+                                            %>       
+                                        </select> </td>
+                                </tr> 
+                                <tr>        
+                                    <td>Metal base:</td>
+                                    <td><select name="select_metalbase_piezas" id="select_metalbase_piezas">
+                                        <option value="-1">--Seleccione--</option>
+                                            <%
+                                                stmt = _connMy.createStatement();
+                                                q="select descripcion from svm_mae_tablas where tablas = 'Metalbase'";
+                                                rsQuery = stmt.executeQuery(q);
+                                                while(rsQuery.next())
+                                                {
+                                                    out.println("<option value='"+rsQuery.getString("descripcion")+"'>"+rsQuery.getString("descripcion")+"</option>");
+                                                }
+                                            %>                                               
+                                        </select> </td>
+                                    <td>Medidas:</td>
+                                    <td><input type="text" maxlength="6" id="txt_medidas1_pieza" name="txt_medidas1_pieza" onkeypress="return validarSiDecimal(event)"/></td>         
+                                    <td></td>
+                                    <td><input type="text" maxlength="6" id="txt_medidas2_pieza" name="txt_medidas2_pieza" onkeypress="return validarSiDecimal(event)"/></td>         
+                                </tr>
+                                <tr>
+                                    <td>Largo:</td>
+                                    <td><input type="text" maxlength="6" id="txt_largo_pieza" name="txt_largo_pieza" onkeypress="return validarSiDecimal(event)"/></td>
+                                    <td>Planos:</td>
+                                    <td><input type="text" maxlength="30" id="txt_planos_pieza" name="txt_planos_pieza" /></td>         
                                     <td rowspan="3">Trabajo a realizar:</td>
-                                    <td rowspan="3"><textarea rows="3" cols="27" id="txt_trabajo_realizar"></textarea>
-                                    </td>
-                                    <td>Medida:</td>
-                                    <td><input type="text" id="txt_medida" name="txt_medida" /></td>
-                                    <td>Cromado:</td>
-                                    <td><select name="select_cromado" id="select_cromado">
-                                            <option value="-1">--Seleccione--</option>
-                                                                                        <option value="0">NO</option>
-                                            <option value="1">SI</option>
-
-                                        </select> </td>
-                                </tr>                           
+                                    <td rowspan="3"><textarea rows="3" cols="27" maxlength="20" id="txt_trabajo_realizar"></textarea></td>                                    
+                                </tr>
                                 <tr>
-                                    <td>Espesor pedido:</td>
-                                    <td><input type="text" id="txt_espesor_pedido" name="txt_espesor_pedido" /></td>
-                                    <td>Rectificado final:</td>
-                                    <td><select name="select_rectificado_final" id="select_rectificado_final">
-                                            <option value="-1">--Seleccione--</option>
-                                                                                        <option value="0">NO</option>
-                                            <option value="1">SI</option>
-
-                                        </select> </td>
-                                </tr>                              
-                                <tr>
-                                    <td>Medida:</td>
-                                    <td><input type="text" id="txt_medida2" name="txt_medida2" /></td>
-                                </tr>                             
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
                             </table>
                         </form>
                     </td>
-
                 </tr>      
-                <tr>
-                    <td colspan="9">
-                        <table class="detalle">
-                            <tr>
-                                <td colspan = "14"><hr style="margin-bottom: 4px;margin-top: 4px;"/></td>
-                            </tr>
-                            <tr>
-                                <td colspan = "14">PIEZAS<hr style="margin-bottom: 4px;margin-top: 4px;"/></td>
-                            </tr>                    
-                            <tr>
-                                <td>Pieza:</td>
-                                <td><select style="width:120px" id="select_cotizacion_pieza" onchange="cargaValorDetalle()" name="select_cotizacion_pieza">
-                                        <option value="">--Seleccione--</option>
-                                        <%
-                                            //stmt = _connMy.createStatement();
-                                            //q="select codigo, nombre from svm_mae_pieza";
-                                            //rsQuery = stmt.executeQuery(q);
-                                            //while(rsQuery.next())
-                                            //{
-                                            //    out.println("<option value='"+rsQuery.getString("codigo")+"'>"+rsQuery.getString("nombre")+"</option>");
-                                            //}
-                                        %>
-                                    </select> 
-                                    <input class = "botonera" type="submit" name="btnCancela" value="Piezas" onClick="loadDialogPiezas()" /></td>
-                                <td>Cantidad:</td>
-                                <td><input type="text" maxlength="11" id="txt_cotizacion_cantidad" name="txt_cotizacion_cantidad" /></td>         
-                                <td>Estado:</td>
-                                <td><select name="select_estado_piezas" id="select_estado_piezas">
-                                        <option value="">--Seleccione--</option>
-                                    </select> </td></td>         
-                                <td>Metal base:</td>
-                                <td><select name="select_metalbase_piezas" id="select_metalbase_piezas">
-                                        <option value="">--Seleccione--</option>
-                                    </select> </td></td>         
-                                <td>Planos:</td>
-                                <td><input type="text" maxlength="11" id="txt_planos_pieza" name="txt_planos_pieza" /></td>         
-                                <td>Medida:</td>
-                                <td><input type="text" maxlength="11" id="txt_medida_pieza" name="txt_medidas_pieza" /></td>         
-                                <td>Largo:</td>
-                                <td><input type="text" maxlength="11" id="txt_largo_pieza" name="txt_largo_pieza" /></td>
-                            </tr>
-                            <tr>
-                                <td colspan="13" rowspan="5" id='margen'>
-                                    <div  id = "tablaDetalle" class="grillaConf">
-                                        <table id="tblDetalleComer">
-                                            <thead>
-                                                <tr>
-                                                    <th></th>
-                                                    <th>Numero</th>
-                                                    <th>Cod. Pieza</th>
-                                                    <th>Pieza</th>
-                                                    <th>Cantidad</th>
-                                                    <th>Valor DM</th>
-                                                    <th>D&iacute;ametro</th>
-                                                    <th>Largo</th>
-                                                    <th>ValUniCrom</th>
-                                                    <th>Total Crom</th>
-                                                </tr>
-                                            </thead>				
-                                            <tbody>
-                                                <%                                        cont = 0;
-                                                    int ultimo = 0;
-
-                                                    var = "select";
-                                                    sp_usu = _connMy.prepareCall("{call sp_cotizaciones_det(?,?,?,?,?,?,?,?,?,?,?,?)}");
-                                                    sp_usu.setString(1, var);
-                                                    sp_usu.setInt(2, 0);
-                                                    sp_usu.setInt(3, 0);
-                                                    sp_usu.setString(4, "");
-                                                    sp_usu.setString(5, "");
-                                                    sp_usu.setInt(6, 0);
-                                                    sp_usu.setString(7, "");
-                                                    sp_usu.setDouble(8, 0.0);
-                                                    sp_usu.setDouble(9, 0.0);
-                                                    sp_usu.setInt(10, 0);
-                                                    sp_usu.setInt(11, 0);
-                                                    sp_usu.setInt(12, Integer.parseInt(corrCotiza));
-                                                    sp_usu.registerOutParameter(1, Types.VARCHAR);
-                                                    sp_usu.execute();
-                                                    final ResultSet rsDetalle = sp_usu.getResultSet();
-                                                    claseGrilla = "";
-                                                    while (rsDetalle.next()) {
-                                                        if (cont % 2 == 0) {
-                                                            claseGrilla = "alt";
-                                                        }
-                                                        out.println("<tr id='filaTablaDetalle" + cont + "' class='" + claseGrilla + "'>");
-                                                %>                                        
-                                                <td>
-                                                    <a id="seleccion<%=cont%>" href="javascript: onclick=ModificaDetalleComercial(<%=cont%>)"> >></a>
-                                                    <input type="hidden" value="0" id="habilitaDetCom" name="habilitaDetCom" />
-                                                </td>                                                                                       
-                                                <td id ="cotazacionDet_correlativo<%=cont%>"><%=rsDetalle.getString("correlativo")%></td>
-                                                <td id ="cotazacionDet_codPieza<%=cont%>"><%=rsDetalle.getString("cod_pieza")%></td>
-                                                <td id ="cotazacionDet_pieza<%=cont%>"><%=rsDetalle.getString("desc_pieza")%></td>
-                                                <td id ="cotazacionDet_cantidad<%=cont%>"><%=rsDetalle.getString("cantidad")%></td>
-                                                <td id ="cotazacionDet_valorDm<%=cont%>"><%=rsDetalle.getString("valor_dm")%></td>
-                                                <td id ="cotazacionDet_diametro<%=cont%>"><%=rsDetalle.getString("diametro")%></td>
-                                                <td id ="cotazacionDet_largo<%=cont%>"><%=rsDetalle.getString("largo")%></td>                                            
-                                                <td id ="cotazacionDet_valUniCrom<%=cont%>"><%=rsDetalle.getString("valor_uni_crom")%></td>
-                                                <td id ="cotazacionDet_totalCrom<%=cont%>"><%=rsDetalle.getString("total_cromado")%></td>
-                                                <%
-                                                        out.print("</tr>");
-                                                        claseGrilla = "";
-                                                        cont++;
-                                                        ultimo = Integer.parseInt(rsDetalle.getString("numero_cotizacion"));
-
-                                                    }
-                                                %>
-                                            </tbody>
-                                        </table>
-                                        <input type="hidden" id="ultimo" value="<%=ultimo + 1%>"></input>
-                                        <input type="hidden" id="cantidad" value="<%=cont%>"></input>
-                                        <input type="hidden" id="txt_correlativo" value=""></input>
-                                    </div>                                               
-                                </td>
-                                <td id="bottom" rowspan="1">
-                                    <img style="cursor: pointer" onclick="ingresaDetalleOT()" id="DetalleIngreso" class="ico" border="0" src="images/logotipos/agregar.png" 
-                                         height="48px" width="25px"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td id="bottom">
-                                    <a href="#">
-                                        <img id="DetalleModifica" style="display: none" onclick="modificaDetalle()" src="images/logotipos/modificar.png" border="0" 
-                                             height="25px" width="25px" />
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td id="bottom">
-                                    <a href="#">
-                                        <img id="DetalleElimina" style="display: none" border="0" onclick="eliminaDetalle()" src="images/logotipos/eliminar.png" 
-                                             height="25px" width="25px" />
-                                    </a>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="6">
-                        <table class="detalle">
-                            <tr>
-                                <td colspan="6"><hr style="margin-bottom: 4px;margin-top: 4px;" /></td>
-                            </tr>       
-                            <tr>
-                                <td colspan="6">DETALLE TRABAJO A REALIZAR<hr style="margin-bottom: 4px;margin-top: 4px;"/></td>
-                            </tr>
-                            <tr>
-                                <td rowspan="3">Trabajo a realizar:</td>
-                                <td rowspan="3"><textarea rows="3" cols="27" id="txt_trabajo_realizar_detalle"></textarea>
-                                </td>
-                                <td>Rectificado pr&eacute;vio:</td>
-                                <td><select name="select_rectificado_previo_detalle" id="select_rectificado_previo_detalle">
-                                        <option value="-1">--Seleccione--</option>
-                                        <option value="0">NO</option>
-                                        <option value="1">SI</option>
-                                    </select> </td>
-                                <td>Medida:</td>
-                                <td><input type="text" id="txt_medida_rect_previo_detalle" name="txt_medida_rect_previo_detalle" /></td>
-                            </tr>
-                            <tr>
-                                <td>Cromado:</td>
-                                <td><select name="select_cromado_detalle" id="select_cromado_detalle">
-                                        <option value="-1">--Seleccione--</option>
-                                        <option value="0">NO</option>
-                                        <option value="1">SI</option>
-                                    </select> </td>
-                                <td>Espeso pedido:</td>
-                                <td><input type="text" id="txt_espesor_pedido_detalle" name="txt_espesor_pedido_detalle" /></td>
-                            </tr>                    
-                            <tr>
-                                <td>Rectificado final:</td>
-                                <td><select name="select_rectificado_final_detalle" id="select_rectificado_final_detalle">
-                                        <option value="-1">--Seleccione--</option>
-                                        <option value="0">NO</option>
-                                        <option value="1">SI</option>
-                                    </select> </td>
-                                <td>Medida:</td>
-                                <td><input type="text" id="txt_medida_rect_final_detalle" name="txt_medida_rect_final_detalle" /></td>
-                            </tr>                    
-                            <tr>
-                                <td colspan="13" rowspan="5" id='margen'>
-                                    <div  id = "tablaDetalle" class="grillaConf">
-                                        <table id="tblDetalleComer">
-                                            <thead>
-                                                <tr>
-                                                    <th></th>
-                                                    <th>Trabajo a Realizar</th>
-                                                    <th>Rectificado Previo</th>
-                                                    <th>Medida Rectificado Previo</th>
-                                                    <th>Cromado</th>
-                                                    <th>Espesor Pedido</th>
-                                                    <th>Rectificado Final</th>
-                                                    <th>Medida Rectificado Final</th>
-                                                </tr>
-                                            </thead>				
-                                            <tbody>
-                                                <%
-                                                    cont = 0;
-                                                    ultimo = 0;
-
-                                                    var = "select";
-                                                    sp_usu = _connMy.prepareCall("{call sp_cotizaciones_det(?,?,?,?,?,?,?,?,?,?,?,?)}");
-                                                    sp_usu.setString(1, var);
-                                                    sp_usu.setInt(2, 0);
-                                                    sp_usu.setInt(3, 0);
-                                                    sp_usu.setString(4, "");
-                                                    sp_usu.setString(5, "");
-                                                    sp_usu.setInt(6, 0);
-                                                    sp_usu.setString(7, "");
-                                                    sp_usu.setDouble(8, 0.0);
-                                                    sp_usu.setDouble(9, 0.0);
-                                                    sp_usu.setInt(10, 0);
-                                                    sp_usu.setInt(11, 0);
-                                                    sp_usu.setInt(12, Integer.parseInt(corrCotiza));
-                                                    sp_usu.registerOutParameter(1, Types.VARCHAR);
-                                                    sp_usu.execute();
-                                                    final ResultSet rsDetalle2 = sp_usu.getResultSet();
-                                                    claseGrilla = "";
-                                                    while (rsDetalle.next()) {
-                                                        if (cont % 2 == 0) {
-                                                            claseGrilla = "alt";
-                                                        }
-                                                        out.println("<tr id='filaTablaDetalle" + cont + "' class='" + claseGrilla + "'>");
-                                                %>                                        
-                                                <td>
-                                                    <a id="seleccion<%=cont%>" href="javascript: onclick=ModificaDetalleComercial(<%=cont%>)"> >></a>
-                                                    <input type="hidden" value="0" id="habilitaDetCom" name="habilitaDetCom" />
-                                                </td>                                                                                       
-                                                <td id ="cotazacionDet_correlativo<%=cont%>"><%=rsDetalle.getString("correlativo")%></td>
-                                                <td id ="cotazacionDet_codPieza<%=cont%>"><%=rsDetalle.getString("cod_pieza")%></td>
-                                                <td id ="cotazacionDet_pieza<%=cont%>"><%=rsDetalle.getString("desc_pieza")%></td>
-                                                <td id ="cotazacionDet_cantidad<%=cont%>"><%=rsDetalle.getString("cantidad")%></td>
-                                                <td id ="cotazacionDet_valorDm<%=cont%>"><%=rsDetalle.getString("valor_dm")%></td>
-                                                <td id ="cotazacionDet_diametro<%=cont%>"><%=rsDetalle.getString("diametro")%></td>
-                                                <td id ="cotazacionDet_largo<%=cont%>"><%=rsDetalle.getString("largo")%></td>                                            
-                                                <td id ="cotazacionDet_valUniCrom<%=cont%>"><%=rsDetalle.getString("valor_uni_crom")%></td>
-                                                <td id ="cotazacionDet_totalCrom<%=cont%>"><%=rsDetalle.getString("total_cromado")%></td>
-                                                <%
-                                                        out.print("</tr>");
-                                                        claseGrilla = "";
-                                                        cont++;
-                                                        ultimo = Integer.parseInt(rsDetalle.getString("numero_cotizacion"));
-
-                                                    }
-                                                %>
-                                            </tbody>
-                                        </table>
-                                        <input type="hidden" id="ultimo" value="<%=ultimo + 1%>"></input>
-                                        <input type="hidden" id="cantidad" value="<%=cont%>"></input>
-                                        <input type="hidden" id="txt_correlativo" value=""></input>
-                                    </div>                                               
-                                </td>
-                                <td id="bottom" rowspan="1">
-                                    <img style="cursor: pointer" onclick="ingresaDetalleOT()" id="DetalleIngreso" class="ico" border="0" src="images/logotipos/agregar.png" 
-                                         height="48px" width="25px"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td id="bottom">
-                                    <a href="#">
-                                        <img id="DetalleModifica" style="display: none" onclick="modificaDetalle()" src="images/logotipos/modificar.png" border="0" 
-                                             height="25px" width="25px" />
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td id="bottom">
-                                    <a href="#">
-                                        <img id="DetalleElimina" style="display: none" border="0" onclick="eliminaDetalle()" src="images/logotipos/eliminar.png" 
-                                             height="25px" width="25px" />
-                                    </a>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-
             </table>
         </div>            
         <input class ="botonera" type="submit" id="btn_ordentaller_grabar" name="btn_ordentaller_grabar" value="Grabar" onclick="grabarOrdenTaller()"/>
         <input class = "botonera" type="submit" name="btnCancela" value="Cancelar" onClick="goBack()" />
-        <input class = "botonera" style="width: 150px" id="btn_cotizacion_aprobar" type="submit" name="btnCancela" value="Aprobar Cotizacion" onClick="aprobarCotiza()" />
+        
+<div id="dialog_pieza" title="Piezas" style="display:none;">
+    <div id="contenido_pieza">
+        Nombre de pieza:&nbsp;&nbsp;
+       <input type="text" maxlength="11" id="txt_cotizacion_filtro_pieza" name="txt_cotizacion_filtro_pieza" />
+       &nbsp;&nbsp;&nbsp;
+       <input style="font-size:12px; height: 23px" class = "botonera" type="submit" name="btnCancela" value="Filtrar Piezas" onclick="filtraPiezas()" />
+       <br/>
+       <br/>
+        <select size="10" style="width: 560px;" id="select_cotizacion_pieza_filter" name="select_cotizacion_pieza_filter" multiple>
+            <%                                    
+                stmt = _connMy.createStatement();
+                q="select codigo, nombre from svm_mae_pieza";
+                rsQuery = stmt.executeQuery(q);
 
-
-
-        <div id="dialog_pieza" title="Piezas" style="display:none;">
-            <div id="contenido_pieza">
-                Nombre de pieza:&nbsp;&nbsp;
-                <input type="text" maxlength="11" id="txt_cotizacion_filtro_pieza" name="txt_cotizacion_filtro_pieza" />
-                &nbsp;&nbsp;&nbsp;
-                <input style="font-size:12px; height: 23px" class = "botonera" type="submit" name="btnCancela" value="Filtrar Piezas" onclick="filtraPiezas()" />
-                <br/>
-                <br/>
-                <select size="10" style="width: 560px;" id="select_cotizacion_pieza_filter" name="select_cotizacion_pieza_filter" multiple>
-                    <%
-                        //stmt = _connMy.createStatement();
-                        //q="select codigo, nombre from svm_mae_pieza";
-                        //rsQuery = stmt.executeQuery(q);
-
-                        //while(rsQuery.next())
-                        //{
-                        //    out.println("<option value='"+rsQuery.getString("codigo")+"'>"+rsQuery.getString("nombre")+"</option>");
-                        //}
-                    %>
-                </select>
-            </div>
-        </div>
-
+                while(rsQuery.next())
+                {
+                    out.println("<option value='"+rsQuery.getString("codigo")+"'>"+rsQuery.getString("nombre")+"</option>");
+                }
+            %>
+        </select>
+    </div>
+</div>        
 
         <div id="dialog_clientes" title="Clientes" style="display:none;" >
             <div id="contenido_clientes">
@@ -851,13 +665,13 @@
                 </table>
                 <br/>
                 <select size="10" style="width: 560px;" id="select_cliente_filter" name="select_cliente_filter" multiple>
-                    <%                //stmt = _connMy.createStatement();
-                        //q="SELECT concat(rut,'-',dv) rut, razon_social,replace(concat(rpad(concat(rut,'-',dv),20,' '),'|'),' ','&nbsp;') rut_pad FROM svm_mae_clientes";
-                        //rsQuery = stmt.executeQuery(q);
-                        //while(rsQuery.next())
-                        //{
-                        //    out.println("<option value='"+rsQuery.getString("rut")+"'>"+rsQuery.getString("rut_pad")+rsQuery.getString("razon_social")+"</option>");
-                        //}
+                    <%                stmt = _connMy.createStatement();
+                        q="SELECT concat(rut,'-',dv) rut, razon_social,replace(concat(rpad(concat(rut,'-',dv),20,' '),'|'),' ','&nbsp;') rut_pad FROM svm_mae_clientes";
+                        rsQuery = stmt.executeQuery(q);
+                        while(rsQuery.next())
+                        {
+                            out.println("<option value='"+rsQuery.getString("rut")+"'>"+rsQuery.getString("rut_pad")+rsQuery.getString("razon_social")+"</option>");
+                        }
                     %>
                 </select>
             </div>

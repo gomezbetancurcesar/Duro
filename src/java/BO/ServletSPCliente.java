@@ -48,7 +48,7 @@ public class ServletSPCliente extends HttpServlet {
             String variable = request.getParameter("mod");
             
             String rutCli=request.getParameter("txt_cliente_rut");
-             out.print(rutCli);
+             
             String razonSocial=request.getParameter("txt_cliente_nombre");
             String contacto=request.getParameter("txt_cliente_contacto");
             String direccion=request.getParameter("txt_cliente_direccion");
@@ -74,7 +74,7 @@ public class ServletSPCliente extends HttpServlet {
             estado=estado.replace("NaN", "");
             String estadoSend=estado.equals("X_X")?"":estado;
             
-            System.out.println("opcion: "+variable+" rut: "+rutCli+" nombre: "+razonSocial+" estado: "+estadoSend);
+            //System.out.println("opcion: "+variable+" rut: "+rutCli+" nombre: "+razonSocial+" estado: "+estadoSend);
             
             try{
                 _connMy = conexionBD.Conectar((String)s.getAttribute("organizacion"));             
@@ -101,7 +101,6 @@ public class ServletSPCliente extends HttpServlet {
                 sp_usu.registerOutParameter(1, Types.VARCHAR);
                 
                 sp_usu.execute();  
-                System.out.println(rutCli);
                 String valorSalida = sp_usu.getString(1);                
                 
                 final ResultSet rs = sp_usu.getResultSet();

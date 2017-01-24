@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Ivan/Documents/respaldo/Sistemas%20SA/Durocrom/Durocrom/web/svm_Actualiza_GuiaDespacho.jsp</file>
-            <file>file:/C:/Users/Ivan/Documents/respaldo/Sistemas%20SA/Durocrom/Durocrom/web/svm_Seleccion_Cotizacion.jsp</file>
-            <file>file:/C:/Users/Ivan/Documents/respaldo/Sistemas%20SA/Durocrom/Durocrom/src/java/BO/ServletSPCotizacion.java</file>
-            <file>file:/C:/Users/Ivan/Documents/respaldo/Sistemas%20SA/Durocrom/Durocrom/web/js/CRUD_cotizacion.js</file>
-            <file>file:/C:/Users/Ivan/Documents/respaldo/Sistemas%20SA/Durocrom/Durocrom/web/svm_Actualiza_Cotizacion.jsp</file>
-            <file>file:/C:/Users/Ivan/Documents/respaldo/Sistemas%20SA/Durocrom/Durocrom/web/svm_Seleccion_GuiaDespacho.jsp</file>
+            <file>file:/C:/Users/equipo-desarrollo-2/Documents/NetBeansProjects/DurocronGit/src/java/BO/ServletValidaLogin.java</file>
+            <file>file:/C:/Users/equipo-desarrollo-2/Documents/NetBeansProjects/DurocronGit/web/svm_Actualiza_Clientes.jsp</file>
+            <file>file:/C:/Users/equipo-desarrollo-2/Documents/NetBeansProjects/DurocronGit/web/login.jsp</file>
+            <file>file:/C:/Users/equipo-desarrollo-2/Documents/NetBeansProjects/DurocronGit/src/java/DAL/conexionBD.java</file>
+            <file>file:/C:/Users/equipo-desarrollo-2/Documents/NetBeansProjects/DurocronGit/web/Main.jsp</file>
         </group>
     </open-files>
 </project-private>

@@ -302,6 +302,11 @@ img.ico{
 #margen {
     padding-top:20px;
 }
+
+#margenblanco {
+    padding-top:0px;
+}
+
 #fondo{
     background: #DFFFDE;
 }
@@ -393,9 +398,14 @@ select.distri{
 	font-size:12px;
 	}
 input{
-	width:100px;
+	width:70px;
 	font-family:Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
 	FONT-SIZE: 12px;
+}
+
+input[type="checkbox"]
+{
+    	width:20px;
 }
 
 .nombre{
@@ -440,6 +450,12 @@ select{
 	font-family:Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
 	FONT-SIZE: 12px;
 }
+#slt_factura_excenta
+{
+	width: 50px;
+	font-family:Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
+	FONT-SIZE: 12px;
+}
 #txt_actComercial_supervisor, #txt_actComercial_nomEje, #txt_actComercial_TipoNegocio,
 #slt_actComercial_status{
     width: 170px;
@@ -455,6 +471,7 @@ select{
 textarea{
     font-family:Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
     FONT-SIZE: 12px;
+    resize: none;
 }
 #Area{
     padding-right: 20px;
@@ -493,4 +510,13 @@ font-family:Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
 }
 #tblDistribucion{
     width: 800px;
+}
+
+/*
+Estilo para los inputs con readonly con apariencia de disabled
+*/
+.readonly{
+    background-color: #f0f0f0;
+    border: 1px solid #cccccc;
+    color: #6d6d6d;
 }

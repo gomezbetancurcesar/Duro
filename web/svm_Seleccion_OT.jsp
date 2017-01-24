@@ -1,8 +1,11 @@
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.text.DateFormat"%>
 <%@page import="java.sql.Types"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
-<%@page import="java.sql.Date"%>
+<%@page import="java.util.Date"%>
 <%@page import="java.sql.CallableStatement"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="DAL.conexionBD"%>
@@ -36,17 +39,48 @@
 <script src="js/messages_es.js" type="text/javascript" ></script>
 <script src="js/CRUD_OrdenTaller.js" type="text/javascript"></script>
 <script src="js/CRUD_ordentaller_det.js" type="text/javascript"></script>
+<style type="text/css">
+.paging_full_numbers a.paginate_button,
+.paging_full_numbers a.paginate_active {
+	border: 1px solid #aaa;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	padding: 2px 5px;
+	margin: 0 3px;
+	cursor: pointer;
+	*cursor: hand;
+	color: #333 !important;
+}
+.paging_full_numbers a.paginate_button {
+	background-color: #ddd;
+}
+
+.paging_full_numbers a.paginate_button:hover {
+	background-color: #ccc;
+	text-decoration: none !important;
+}
+
+.paging_full_numbers a.paginate_active {
+	background-color: #99B3FF;
+}
+
+.paging_full_numbers a.paginate_button {
+    color: #fff !important;
+}
+.paging_full_numbers a.paginate_active {
+    color: #fff !important;
+}
+</style>
 <%  
     HttpSession s = request.getSession();
     Connection _connMy = null;
-    CallableStatement sp_Carga = null;
     int id= 1;
     int cont =0; 
     String supervisor = "";
     String rut = "";
     String tipoUser = "";
     String nroSecuencia="";
-    String varCarga = "";
     String secu = "";
     try
     {
@@ -83,16 +117,18 @@
 %>
 <script type="text/javascript">
 $(document).ready(function(){
-   $('#tblActComercial').dataTable( {//CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+    $('#tblOrdenTaller').dataTable({//CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
         "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
         bFilter: false, bInfo: false,
         "bLengthChange": false,
         "bAutoWidth": false,
-       "aoColumnDefs": [{ 'bSortable': false, 'aTargets': [1,2,3,4,5,6,7,8,9,10,11] }]
+       "aoColumnDefs": [{ 'bSortable': false, 'aTargets': [1,2,3,4,5,6] }],
     });
+    filtraOrdenTaller();
 });
+
 function seleccion_registro_actividadComercial(id){
-    var numero = $("#corrCotiza").val();    
+    var numero = $("#corrOT").val();    
     var secu = $("#secu").val();        
     if($("#habilitaActCom").val() == 0 || numero == null )
     {
@@ -131,58 +167,53 @@ function getUrlParameter(sParam) {
                         <tr>
                             <td align="right">Fecha&nbsp;Desde:</td>	
                             <td>
+                                <%
+                                    Date date = new Date();
+                                    DateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+                                    Calendar calendario = Calendar.getInstance();
+                                    calendario.setTime(date);
+                                    
+                                    calendario.set(Calendar.DAY_OF_MONTH, calendario.getActualMinimum(Calendar.DAY_OF_MONTH));
+                                    String primerDiaMes = formato.format(calendario.getTime());
+                                    
+                                    calendario.set(Calendar.DAY_OF_MONTH, calendario.getActualMaximum(Calendar.DAY_OF_MONTH));
+                                    String ultimoDiaMes = formato.format(calendario.getTime());
+                                %>                                
                                 <!--Codigo Sistemas SA-->
-                                <input type = "text" readonly name = "txt_filtroComercial_ingreso" id= "txt_filtroComercial_ingreso" size="12" />
+                                <input type = "text" readonly value="<%out.print(primerDiaMes);%>" name = "txt_filtroComercial_ingreso" id= "txt_filtroComercial_ingreso" size="12" />
                                 <img src="images/calendario.png" width="16" height="16" border="0" title="Fecha Inicial" id="lanzador" />
                                 <!-- script que define y configura el calendario--> 
                                 <script type="text/javascript"> 
                                     Calendar.setup({ 
                                     inputField     :    "txt_filtroComercial_ingreso",     // id del campo de texto 
-                                    ifFormat     :     "%Y-%m-%d",     // formato de la fecha que se escriba en el campo de texto 
+                                    ifFormat     :     "%d-%m-%Y",     // formato de la fecha que se escriba en el campo de texto 
                                     button     :    "lanzador"     // el id del botón que lanzará el calendario 
                                     }); 
                                 </script>
                             </td>
                             <td align="right">&nbsp;&nbsp;Fecha&nbsp; Hasta:</td>
                             <td>
-                                <input type = "text" readonly name = "txt_filtroComercial_final" id = "txt_filtroComercial_final" size="12"/>
+                                <input type = "text" readonly value="<%out.print(ultimoDiaMes);%>" name = "txt_filtroComercial_final" id = "txt_filtroComercial_final" size="12"/>
                                 <img src="images/calendario.png" width="16" height="16" border="0" title="Fecha Inicial" id="lanza" />
                                 <!-- script que define y configura el calendario--> 
                                 <script type="text/javascript"> 
                                     Calendar.setup({ 
                                     inputField     :    "txt_filtroComercial_final",     // id del campo de texto 
-                                    ifFormat     :     "%Y-%m-%d",     // formato de la fecha que se escriba en el campo de texto 
+                                    ifFormat     :     "%d-%m-%Y",     // formato de la fecha que se escriba en el campo de texto 
                                     button     :    "lanza"     // el id del botón que lanzará el calendario 
                                     }); 
                                 </script>
                                 <!--Codigo Sistemas SA-->
                             </td>
-<!--                            <td>&nbsp;&nbsp;Ejecutivo:</td>
-                            <td>
-                                <select id="slt_filtroComercial_ejecutivo" name="slt_filtroComercial_ejecutivo"/>
-                                    <option value="">--Seleccione--</option>     
-                                   <%
-                                        Statement stmt = null;
-                                        ResultSet rsQuery = null;                                       
-                                        stmt = _connMy.createStatement();
-                                        String q = "";
-
-                                        q="select rut, nombre_user from svm_mae_usuarios";
-
-                                        rsQuery = stmt.executeQuery(q);
-
-                                        while(rsQuery.next())
-                                        {
-                                            out.println("<option value='"+rsQuery.getString("rut")+"'>"+rsQuery.getString("nombre_user")+"</option>");
-                                        }
-                                    %>
-                            </td>-->
                             <td>&nbsp;&nbsp;Estado:</td>
                             <td>
                                 <select id="slt_filtroComercial_estado" name="slt_filtroComercial_estado">
                                      <option value="">--Seleccione--</option>
                                     <%                                   
+                                        Statement stmt = null;
+                                        ResultSet rsQuery = null;                                       
                                         stmt = _connMy.createStatement();
+                                        String q = "";                                        
 
                                         q="select descripcion from svm_mae_tablas where tablas='Estado_OrdenTaller'";
 
@@ -208,68 +239,61 @@ function getUrlParameter(sParam) {
         <tr>
             <td colspan="5">
                 <div class="datagrid">
-                    <table id="tblActComercial" >
+                    <table id="tblOrdenTaller" >
                         <thead>
                             <tr>
                                 <th width="2.4%"></th>
-                                <th width="5%">N&uacute;mero Cotizaci&oacute;n</th>
-                                
-                                <th width="5.34%">Fecha Emisi&oacute;n</th>
-                                <th width="6.17%">Cliente</th>
                                 <th width="6.17%">N° OT</th>
-                                <th width="19.03%">Estado</th>
-<!--                                <th width="3.9%">Pieza</th>
-                                <th width="8.8%">Cot. Especial</th>
-                                <th width="7.26%">Estado</th>
-                                <th width="7.14%">Total</th>
-                                <th width="9.1%">Moneda</th>-->
+                                <th width="5%">N&uacute;mero Cotizaci&oacute;n</th>
+                                <th width="5.34%">Fecha Emisi&oacute;n</th>
+                                <th width="19.36%">Cliente</th>
+                                <th width="6.17%">Estado</th>
                             </tr>
                         </thead>                        
                         <tbody>                            
                             <%                                
                                 String var = "select_all";
                                 
-                                CallableStatement sp_usu = _connMy.prepareCall("{call sp_ordentaller(?,?,?,?,?,?,?,?,?,?)}");
+                                CallableStatement sp_usu = _connMy.prepareCall("{call sp_ordentaller(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
                                 sp_usu.setString(1,var);
                                 sp_usu.setInt(2,0);
                                 sp_usu.setInt(3,0);
                                 sp_usu.setDate(4,null);
                                 sp_usu.setDate(5,null);
                                 sp_usu.setDate(6,null);
-                                sp_usu.setString(7,"");
-                                sp_usu.setInt(8,1);
-                                sp_usu.setDate(9,null);
-                                sp_usu.setDate(10,null);
+                                sp_usu.setString(7, "");
+                                sp_usu.setInt(8, 0);
+                                sp_usu.setInt(9, 0);
+                                sp_usu.setString(10, "");
+                                sp_usu.setString(11, "");
+                                sp_usu.setInt(12, 0);
+                                sp_usu.setString(13, "");
+                                sp_usu.setInt(14, 0);
+                                sp_usu.setString(15,"");
+                                sp_usu.setString(16,"");
                                 sp_usu.registerOutParameter(1, Types.VARCHAR);                                                          
                                 sp_usu.execute();
                                 
                                 final ResultSet rs = sp_usu.getResultSet();
-                                
                                 String cla = "";
                                 while(rs.next())
                                 {
                                     if(cont % 2 == 0)
-                                    {
                                         cla = "alt";
-                                    }else
-                                    {  
+                                    else
                                         cla = "";
-
-                                    }
-                                    out.println("<tr id='filaTablaActComercial"+cont+"' class='"+cla+"'>");
+                                    out.println("<tr id='filaTablaOrdenTaller"+cont+"' class='"+cla+"'>");
                             %>
                             <td>
-                                <a href="javascript: onclick=ModificaActComercial(<%=cont%>)"> >></a>
+                                <a href="javascript: onclick=ModificaOrdenTaller(<%=cont%>)"> >></a>
                                 <input type="hidden" value="0" id="habilitaActCom" name="habilitaActCom" />
-                                <input type="hidden" value="" id="corrCotiza" />
+                                <input type="hidden" value="" id="corrOT" />
                             </td>
+                            <td id="numero_ot<%=cont%>"><%= rs.getString("numero_ordentaller")%></td>
                             <td id="num_cotizacion<%=cont%>"><%= rs.getString("numero_cotizacion")%></td>
-                            
                             <td id="fecha_emision<%=cont%>"><%=rs.getString("fecha_emision")%></td>
-                            <td id="cliente<%=cont%>"><%= rs.getString("rut_cli")%></td>
-                            <td id="N° OT<%=cont%>"><%= rs.getString("razon_social")%></td>
-                            <td id="Estado<%=cont%>"><%= rs.getString("pieza")%></td>
-<!--                                                 -->
+                            <td id="cliente<%=cont%>"><%= rs.getString("razon_social")%></td>
+                            <td id="estado<%=cont%>"><%= rs.getString("estado")%></td>
                             <td style="display: none" id="secuencia<%=cont%>"><%= rs.getString("secuencia")%></td>
                             <%
                                     out.println("</tr>");                                   

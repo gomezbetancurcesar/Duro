@@ -6,15 +6,19 @@
 
 package BO;
 
+
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import DAL.conexionBD;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.Date;
-import java.sql.ResultSet;
 import java.sql.Types;
-import java.text.SimpleDateFormat;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -50,24 +54,22 @@ public class ServletSPCotizacion extends HttpServlet {
             String opcion=request.getParameter("opcion");
             
             String numeroCotiza=request.getParameter("txt_cotizacion_numero").isEmpty()? "0":request.getParameter("txt_cotizacion_numero");
-            String fechaEmision=request.getParameter("txt_cotizacion_fecha");
-            String antencion=request.getParameter("txt_cotizacion_atencion");
+            String fechaEmision= request.getParameter("txt_cotizacion_fecha");
             String rutEje=request.getParameter("txt_cotizacion_emitida_por").replace("NaN", "").isEmpty()?"0":request.getParameter("txt_cotizacion_emitida_por").replace("NaN", "");
             String rutCli=request.getParameter("txt_cotizacion_rutcli");
-            String cotizacion=request.getParameter("select_cotizacion_especial");
-            String moneda=request.getParameter("select_cotizacion_moneda");
             String presupuesto=request.getParameter("select_cotizacion_presupuesto_valido");
             String plazoEntrego=request.getParameter("select_cotizacion_plazo_entrega");
             String condicionPago=request.getParameter("select_cotizacion_condicion_pago");
+            String fechaCompromiso= request.getParameter("txt_cotizacion_fechacom");
             String sequencia=request.getParameter("sequencia").equals("undefined")?"0":request.getParameter("sequencia");
             String desde=request.getParameter("fecha_desde");
             String hasta=request.getParameter("fecha_hasta");
-            
+
             rutCli=rutCli.contains("-")?rutCli.substring(0,rutCli.indexOf("-")):rutCli;
             
             String estado=request.getParameter("estado").isEmpty()?"Ingresada":request.getParameter("estado");
             estado=request.getParameter("estado").equals("X_X")?"":request.getParameter("estado");
-            
+
             try{
                 _connMy = conexionBD.Conectar((String)s.getAttribute("organizacion")); 
                 CallableStatement sp_usu=null;
@@ -83,28 +85,27 @@ public class ServletSPCotizacion extends HttpServlet {
                     System.out.println(e.toString());
                 }
                 
-                Date sqlDate= new Date(formato.parse(fechaEmision).getTime());               
+                Date sqlDate = new Date(formato.parse(fechaEmision).getTime());                
+                Date sqlDateComp = new Date(formato.parse(fechaCompromiso).getTime()); 
                 
-                sp_usu = _connMy.prepareCall("{call sp_cotizacion(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+                sp_usu = _connMy.prepareCall("{call sp_cotizacion(?,?,?,?,?,?,?,?,?,?,?,?,?)}");
                 sp_usu.setString(1,opcion);
                 sp_usu.setInt(2,Integer.parseInt(numeroCotiza));
                 sp_usu.setDate(3,sqlDate);
                 sp_usu.setString(4,estado);
                 sp_usu.setInt(5,Integer.parseInt(rutEje));
                 sp_usu.setInt(6,Integer.parseInt(rutCli));
-                sp_usu.setString(7,antencion);
-                sp_usu.setString(8,moneda);
-                sp_usu.setString(9,cotizacion);
-                sp_usu.setString(10,presupuesto);
-                sp_usu.setString(11,plazoEntrego);
-                sp_usu.setString(12,condicionPago);
-                sp_usu.setInt(13,Integer.parseInt(sequencia));
-                sp_usu.setString(14,desde);
-                sp_usu.setString(15,hasta);
+                sp_usu.setString(7,presupuesto);
+                sp_usu.setString(8,plazoEntrego);
+                sp_usu.setString(9,condicionPago);
+                sp_usu.setDate(10,sqlDateComp);
+                sp_usu.setInt(11,Integer.parseInt(sequencia));
+                sp_usu.setString(12,desde);
+                sp_usu.setString(13,hasta);
                 sp_usu.registerOutParameter(1, Types.VARCHAR);
                 
                 sp_usu.execute();
-                String valorSalida = sp_usu.getString(1);                
+                String valorSalida = sp_usu.getString(1);    
 
                 if(valorSalida.equalsIgnoreCase("error ejecucion"))
                 {
@@ -122,17 +123,17 @@ public class ServletSPCotizacion extends HttpServlet {
                     {
                         salida += rs.getString("numero_cotizacion")+"|";   
                         salida += rs.getString("fecha_emision")+"|";   
-                        salida += rs.getString("atencion")+"|"; 
                         salida += rs.getString("emitida_por")+"|"; 
-                        salida += rs.getString("moneda")+"|"; 
-                        salida += rs.getString("cotizacion_especial")+"|"; 
                         salida += rs.getString("presupuesto_valido")+"|"; 
                         salida += rs.getString("plazo_entrega")+"|"; 
                         salida += rs.getString("condiciones_pago")+"|"; 
                         salida += rs.getString("rut_cli")+"|"; 
                         salida += rs.getString("razon_social")+"|"; 
+                        salida += rs.getString("fecha_compromiso")+"|";
                     }
+                    
                 }else if(opcion.equals("select_all")){
+                    
                     String cla = "";
                     int cont =0; 
                     while(rs.next())
@@ -157,19 +158,16 @@ public class ServletSPCotizacion extends HttpServlet {
                         salida +="<td id=\"fecha_emision"+cont+"\">"+rs.getString("fecha_emision")+"</td>";
                         salida +="<td id=\"rut_cli"+cont+"\">"+ rs.getString("rut_cli")+"</td>";
                         salida +="<td id=\"razon_cli"+cont+"\">"+rs.getString("razon_social")+"</td>";
-                        salida +="<td id=\"pieza"+cont+"\">"+rs.getString("pieza")+"</td>";
-                        salida +="<td id=\"cot_especial"+cont+"\">"+rs.getString("cotizacion_especial")+"</td>";
                         salida +="<td id=\"estado"+cont+"\">"+rs.getString("estado")+"</td>";
                         salida +="<td id=\"total"+cont+"\">"+rs.getString("total")+"</td>";
-                        salida +="<td id=\"moneda"+cont+"\">"+rs.getString("moneda")+"</td>";
                         salida +="<td style=\"display: none\" id=\"secuencia"+cont+"\">"+rs.getString("secuencia")+"</td>";
                         salida +="</tr>";
                         
                         cont ++;                                    
                     }
-                    System.out.println("salida = " + salida );
+                    
                 }
-                
+                out.println(salida);
             }catch(Exception e){
                 //_connMy.rollback();
                 e.printStackTrace();

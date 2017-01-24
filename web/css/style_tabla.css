@@ -497,3 +497,181 @@ border-left: none;
 {
 border-bottom: none;
 }
+/*TABLA FACTURA*/
+#tblFactura_paginate
+{
+    border-top: 1px solid #585858;
+    background: #DFFFDE;
+    text-align: center;
+    padding: 2px;
+}
+#tblFactura_first,#tblFactura_previous,#tblFactura_next,#tblFactura_last{
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    padding: 2px 8px;
+    margin: 1px;
+    color: #FFFFFF;
+    border: 1px solid #585858;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #2798D9), color-stop(1, #2798D9) );
+    background:-moz-linear-gradient( center top, #2798D9 5%, #2798D9 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#36752D', endColorstr='#275420');
+    background-color:#36752D;
+}
+#tblFactura_first:hover,#tblFactura_previous:hover,#tblFactura_next:hover,#tblFactura_last:hover
+{
+    text-decoration: none;
+    border-color: #275420; 
+    color: #FF0000; 
+    background: none; 
+    background-color:#36752D;
+}
+#tblFactura_paginate span span{
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    padding: 2px 8px;
+    margin: 1px;
+    color: #FFFFFF;
+    border: 1px solid #585858;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #2798D9), color-stop(1, #2798D9) );
+    background:-moz-linear-gradient( center top, #2798D9 5%, #2798D9 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#36752D', endColorstr='#275420');
+    background-color:#36752D;
+}
+#tblFactura_paginate span span:hover
+{
+    text-decoration: none;border-color: #275420; color: #FF0000; background: none; background-color:#36752D;
+}
+/*FIN TABLA FACTURA*/
+#select_cliente_filter, #select_factura_tmpGuia_filter, #label_guias
+{
+    font-family: Lucida Console;
+}
+#tblGuiaDespTMP a
+{
+ text-decoration: underline;
+}
+
+/*TABLA GUIA DE DESPACHO*/
+#tblGuiaDespacho_paginate
+{
+    border-top: 1px solid #585858;
+    background: #DFFFDE;
+    text-align: center;
+    padding: 2px;
+}
+#tblGuiaDespacho_first,#tblGuiaDespacho_previous,#tblGuiaDespacho_next,#tblGuiaDespacho_last{
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    padding: 2px 8px;
+    margin: 1px;
+    color: #FFFFFF;
+    border: 1px solid #585858;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #2798D9), color-stop(1, #2798D9) );
+    background:-moz-linear-gradient( center top, #2798D9 5%, #2798D9 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#36752D', endColorstr='#275420');
+    background-color:#36752D;
+}
+#tblGuiaDespacho_first:hover,#tblGuiaDespacho_previous:hover,#tblGuiaDespacho_next:hover,#tblGuiaDespacho_last:hover
+{
+    text-decoration: none;
+    border-color: #275420; 
+    color: #FF0000; 
+    background: none; 
+    background-color:#36752D;
+}
+#tblGuiaDespacho_paginate_span span{
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    padding: 2px 8px;
+    margin: 1px;
+    color: #FFFFFF;
+    border: 1px solid #585858;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #2798D9), color-stop(1, #2798D9) );
+    background:-moz-linear-gradient( center top, #2798D9 5%, #2798D9 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#36752D', endColorstr='#275420');
+    background-color:#36752D;
+}
+#tblGuiaDespacho_paginate span span:hover
+{
+    text-decoration: none;border-color: #275420; color: #FF0000; background: none; background-color:#36752D;
+}
+/*FIN TABLA GUIA DE DESPACHO*/
+
+#select_GDFactura_formaPago , #select_GDFactura_adicional
+{
+    width: 250px;
+}
+#select_GDFactura_excenta
+{
+    width: 120px;
+}
+
+/*TABLA ORDEN TALLER*/
+#tblOrdenTaller_paginate
+{
+    border-top: 1px solid #585858;
+    background: #DFFFDE;
+    text-align: center;
+    padding: 2px;
+}
+#tblOrdenTaller_first,#tblOrdenTaller_previous,#tblOrdenTaller_next,#tblOrdenTaller_last{
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    padding: 2px 8px;
+    margin: 1px;
+    color: #FFFFFF;
+    border: 1px solid #585858;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #2798D9), color-stop(1, #2798D9) );
+    background:-moz-linear-gradient( center top, #2798D9 5%, #2798D9 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#36752D', endColorstr='#275420');
+    background-color:#36752D;
+}
+#tblOrdenTaller_first:hover,#tblOrdenTaller_previous:hover,#tblOrdenTaller_next:hover,#tblOrdenTaller_last:hover
+{
+    text-decoration: none;
+    border-color: #275420; 
+    color: #FF0000; 
+    background: none; 
+    background-color:#36752D;
+}
+#tblOrdenTaller_paginate span span{
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    padding: 2px 8px;
+    margin: 1px;
+    color: #FFFFFF;
+    border: 1px solid #585858;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #2798D9), color-stop(1, #2798D9) );
+    background:-moz-linear-gradient( center top, #2798D9 5%, #2798D9 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#36752D', endColorstr='#275420');
+    background-color:#36752D;
+}
+#tblOrdenTaller_paginate span span:hover
+{
+    text-decoration: none;border-color: #275420; color: #FF0000; background: none; background-color:#36752D;
+}
+/*FIN TABLA ORDEN TALLER*/
